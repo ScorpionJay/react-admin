@@ -5,7 +5,7 @@ import store from "../store";
 import { hot } from 'react-hot-loader'
 
 const App = () => (
-  <Provider store={store}>
+  <Provider store={store()}>
     <Main />
   </Provider>
 );

@@ -7,104 +7,120 @@ const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
 
 import TableComponent from "./TableComponent";
+import DateDemo from "./DateDemo";
+import Table from "./Table";
+
+import { LocaleProvider } from 'antd';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import 'moment/locale/zh-cn';
 
 // import "../style.scss";
 
 const App = () => (
-  <Router>
-    <div>
-      <Layout>
-        <Header className="header">
-          <div className="logo" />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={["2"]}
-            style={{ lineHeight: "64px" }}
-          >
-            <Menu.Item key="1">
-              <Link to="/">Home</Link>
-            </Menu.Item>
-            <Menu.Item key="2">
-              <Link to="/topics">topics</Link>
-            </Menu.Item>
-            <Menu.Item key="3">nav 3</Menu.Item>
-          </Menu>
-        </Header>
+
+  <LocaleProvider locale={zh_CN}>
+
+
+    <Router>
+      <div>
         <Layout>
-          <Sider width={200} style={{ background: "#fff" }}>
+          <Header className="header">
+            <div className="logo" />
             <Menu
-              mode="inline"
-              defaultSelectedKeys={["1"]}
-              defaultOpenKeys={["sub1"]}
-              style={{ height: "100%", borderRight: 0 }}
+              theme="dark"
+              mode="horizontal"
+              defaultSelectedKeys={["2"]}
+              style={{ lineHeight: "64px" }}
             >
-              <SubMenu
-                key="sub1"
-                title={
-                  <span>
-                    <Icon type="user" />subnav 1
-                  </span>
-                }
-              >
-                <Menu.Item key="1">
-                  <Link to="/table">TableComponent</Link>
-                </Menu.Item>
-                <Menu.Item key="2">option2</Menu.Item>
-                <Menu.Item key="3">option3</Menu.Item>
-                <Menu.Item key="4">option4</Menu.Item>
-              </SubMenu>
-              <SubMenu
-                key="sub2"
-                title={
-                  <span>
-                    <Icon type="laptop" />subnav 2
-                  </span>
-                }
-              >
-                <Menu.Item key="5">option5</Menu.Item>
-                <Menu.Item key="6">option6</Menu.Item>
-                <Menu.Item key="7">option7</Menu.Item>
-                <Menu.Item key="8">option8</Menu.Item>
-              </SubMenu>
-              <SubMenu
-                key="sub3"
-                title={
-                  <span>
-                    <Icon type="notification" />subnav 3
-                  </span>
-                }
-              >
-                <Menu.Item key="9">option9</Menu.Item>
-                <Menu.Item key="10">option10</Menu.Item>
-                <Menu.Item key="11">option11</Menu.Item>
-                <Menu.Item key="12">option12</Menu.Item>
-              </SubMenu>
+              <Menu.Item key="1">
+                <Link to="/">Home</Link>
+              </Menu.Item>
+              <Menu.Item key="2">
+                <Link to="/topics">topics</Link>
+              </Menu.Item>
+              <Menu.Item key="3">nav 3</Menu.Item>
             </Menu>
-          </Sider>
-          <Layout style={{ padding: "0 24px 24px" }}>
-            <Breadcrumb style={{ margin: "16px 0" }}>
-              <Breadcrumb.Item>Home</Breadcrumb.Item>
-              <Breadcrumb.Item>List</Breadcrumb.Item>
-              <Breadcrumb.Item>App</Breadcrumb.Item>
-            </Breadcrumb>
-            <Content
-              style={{
-                background: "#fff",
-                padding: 24,
-                margin: 0,
-                minHeight: 280
-              }}
-            >
-              <Route exact path="/" component={Home} />
-              <Route path="/table" component={TableComponent} />
-              <Route path="/topics" component={Topics} />
-            </Content>
+          </Header>
+          <Layout>
+            <Sider width={200} style={{ background: "#fff" }}>
+              <Menu
+                mode="inline"
+                defaultSelectedKeys={["1"]}
+                defaultOpenKeys={["sub1"]}
+                style={{ height: "100%", borderRight: 0 }}
+              >
+                <SubMenu
+                  key="sub1"
+                  title={
+                    <span>
+                      <Icon type="user" />subnav 1
+                  </span>
+                  }
+                >
+                  <Menu.Item key="1">
+                    <Link to="/table">TableComponent</Link>
+                  </Menu.Item>
+                  <Menu.Item key="2">
+                    <Link to="/date">Date</Link>
+                  </Menu.Item>
+                  <Menu.Item key="3">
+                    <Link to='tables'>封装表格</Link>
+                  </Menu.Item>
+                  <Menu.Item key="4">option4</Menu.Item>
+                </SubMenu>
+                <SubMenu
+                  key="sub2"
+                  title={
+                    <span>
+                      <Icon type="laptop" />subnav 2
+                  </span>
+                  }
+                >
+                  <Menu.Item key="5">option5</Menu.Item>
+                  <Menu.Item key="6">option6</Menu.Item>
+                  <Menu.Item key="7">option7</Menu.Item>
+                  <Menu.Item key="8">option8</Menu.Item>
+                </SubMenu>
+                <SubMenu
+                  key="sub3"
+                  title={
+                    <span>
+                      <Icon type="notification" />subnav 3
+                  </span>
+                  }
+                >
+                  <Menu.Item key="9">option9</Menu.Item>
+                  <Menu.Item key="10">option10</Menu.Item>
+                  <Menu.Item key="11">option11</Menu.Item>
+                  <Menu.Item key="12">option12</Menu.Item>
+                </SubMenu>
+              </Menu>
+            </Sider>
+            <Layout style={{ padding: "0 24px 24px" }}>
+              <Breadcrumb style={{ margin: "16px 0" }}>
+                <Breadcrumb.Item>Home</Breadcrumb.Item>
+                <Breadcrumb.Item>List</Breadcrumb.Item>
+                <Breadcrumb.Item>App</Breadcrumb.Item>
+              </Breadcrumb>
+              <Content
+                style={{
+                  background: "#fff",
+                  padding: 24,
+                  margin: 0,
+                  minHeight: 280
+                }}
+              >
+                <Route exact path="/" component={Home} />
+                <Route path="/table" component={TableComponent} />
+                <Route path="/tables" component={Table} />
+                <Route path="/date" component={DateDemo} />
+                <Route path="/topics" component={Topics} />
+              </Content>
+            </Layout>
           </Layout>
         </Layout>
-      </Layout>
 
-      {/* <div>
+        {/* <div>
       <ul>
         <li>
           <Link to="/">Home</Link>
@@ -116,8 +132,9 @@ const App = () => (
           <Link to="/topics">Topics</Link>
         </li>
       </ul> */}
-    </div>
-  </Router>
+      </div>
+    </Router>
+  </LocaleProvider>
 );
 
 const Home = () => (
