@@ -10,6 +10,7 @@ import {
 } from './action';
 
 import { Input, Button, Modal } from 'antd';
+import Modify from "./component/modify";
 
 class TableContainer extends Component {
 
@@ -17,7 +18,7 @@ class TableContainer extends Component {
         super(props)
         this.state = {
             keyword: '',
-            visible: false,
+            visible: 0,//0隐藏、 1查看 2修改 3新增 
             title: '',
             vo: null
         }
@@ -79,7 +80,7 @@ class TableContainer extends Component {
 
     onView = vo => {
         this.setState({
-            visible: true,
+            visible: 1,
             title: '查看',
             vo
         })
@@ -87,7 +88,7 @@ class TableContainer extends Component {
 
     onModify = vo => {
         this.setState({
-            visible: true,
+            visible: 2,
             title: '修改',
             vo
         })
@@ -101,6 +102,7 @@ class TableContainer extends Component {
                 value={this.state.keyword}
                 ref={el => this.inputName = el}
                 onChange={() => this.setState({ keyword: this.inputName.input.value })}
+                onPressEnter={this.onSearch}
             />
             <Button type="primary" icon="search" onClick={this.onSearch}>搜索</Button>
         </div>
@@ -120,16 +122,16 @@ class TableContainer extends Component {
             />
             {
                 // this.state.visible &&
-                <Modal visible={true}
+                <Modal
                     title={this.state.title}
-                    visible={this.state.visible}
+                    visible={this.state.visible !== 0}
                     maskClosable={false}
                     // destroyOnClose={true}
                     keyboard={false}
                     // onOk={this.handleOk}
-                    onCancel={() => this.setState({ visible: false, vo: null })}
+                    onCancel={() => this.setState({ visible: 0})}
                 >
-                    {JSON.stringify(this.state.vo)}
+                    <Modify data={this.state.vo} isEdit={true} />
                 </Modal>
             }
         </div>)

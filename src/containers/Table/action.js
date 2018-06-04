@@ -22,6 +22,7 @@ export const getListAction = ({ page, pageSize, keyword = '' }) => dispatch => {
         data: {
             list: data2.slice(page - 1, pageSize),
             total: data2.length,
+            page,
             keyword
         }
     })
