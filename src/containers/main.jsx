@@ -9,6 +9,7 @@ const { Header, Content, Sider } = Layout;
 import TableComponent from "./TableComponent";
 import DateDemo from "./DateDemo";
 import Table from "./Table";
+import Demo from "./demo";
 
 import { LocaleProvider } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
@@ -66,7 +67,9 @@ const App = () => (
                   <Menu.Item key="3">
                     <Link to='tables'>封装表格</Link>
                   </Menu.Item>
-                  <Menu.Item key="4">option4</Menu.Item>
+                  <Menu.Item key="4">
+                    <Link to='demo'>Demo</Link>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
@@ -114,6 +117,7 @@ const App = () => (
                 <Route path="/table" component={TableComponent} />
                 <Route path="/tables" component={Table} />
                 <Route path="/date" component={DateDemo} />
+                <Route path="/demo" component={Demo} />
                 <Route path="/topics" component={Topics} />
               </Content>
             </Layout>
