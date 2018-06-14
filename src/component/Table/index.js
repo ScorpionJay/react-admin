@@ -18,6 +18,7 @@ class TableComponent extends Component {
                 dataSource={this.props.dataSource}
                 pagination={false}
                 title={this.props.header}
+                rowKey={record=>record.id}
                 footer={() => <div style={{ textAlign: 'center' }}>
                     <Pagination
                         current={this.props.current}
