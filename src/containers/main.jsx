@@ -11,6 +11,8 @@ import DateDemo from "./DateDemo";
 import Table from "./Table";
 import Demo from "./demo";
 import Music from "./music";
+import Upload from "./Upload";
+
 
 import { LocaleProvider } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
@@ -74,6 +76,9 @@ const App = () => (
                   <Menu.Item key="5">
                     <Link to='music'>Music</Link>
                   </Menu.Item>
+                  <Menu.Item key="6">
+                    <Link to='upload'>Upload</Link>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
@@ -123,6 +128,7 @@ const App = () => (
                 <Route path="/date" component={DateDemo} />
                 <Route path="/demo" component={Demo} />
                 <Route path="/music" component={Music} />
+                <Route path="/upload" component={Upload} />
                 <Route path="/topics" component={Topics} />
               </Content>
             </Layout>
