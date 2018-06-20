@@ -1,38 +1,51 @@
+/**
+ * music action
+ */
+import Request from '../../utils/request'
+import API from '../../utils/api'
+
 export const GET_LIST = 'GET_LIST';
 export const PAGE_LIST = 'PAGE_LIST';
 export const SEARCH = 'SERACH';
 
-// let data = [];
+export const getListAction = ({ page, pageSize, keyword = '' }) => async dispatch => {
 
-// for (let index = 0; index < 100; index++) {
-//     data.push({
-//         id: index + 1,
-//         key: Math.random(),
-//         name: index % 2 === 0 ? `jay` : 'mike',
-//         age: '18'
-//     })
-// }
-
-export const getListAction = ({ page, pageSize, keyword = '' }) => dispatch => {
-
-    // const data2 = keyword != '' ? data.filter(item => item.name === keyword) : data;
-
-    fetch('https://api.nway.top/api/music/top2')
-        .then(response => response.json())
-        .then(data=>{
-            dispatch({
-                type: GET_LIST,
-                data: {
-                    list: data.data,
-                    total: data.data.length,
-                    page,
-                    pageSize,
-                    keyword
-                }
-            })
-        })
+    let data = await Request({
+        url: API.musicList,
+        method: 'get',
+        data: {
+            page, pageSize
+        }
+    })
 
     
+    dispatch({
+        type: GET_LIST,
+        data: {
+            list: data.content,
+            total: data.totalElements,
+            page,
+            pageSize,
+            keyword
+        }
+    })
+
+    // fetch('https://api.nway.top/api/music/top2')
+    //     .then(response => response.json())
+    //     .then(data=>{
+    //         dispatch({
+    //             type: GET_LIST,
+    //             data: {
+    //                 list: data.data,
+    //                 total: data.data.length,
+    //                 page,
+    //                 pageSize,
+    //                 keyword
+    //             }
+    //         })
+    //     })
+
+
 }
 
 

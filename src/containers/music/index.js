@@ -40,20 +40,22 @@ class TableContainer extends Component {
     {
       title: "Name",
       key: "name",
-      dataIndex: "name"
+      dataIndex: "name",
+      align:'center'
     },
     {
       title: "Artist",
       key: "artist",
       render: (text, record) => (
         <span>{record.artist.map(item => item.name).join("、")}</span>
-      )
+      ),
+      align:'center'
     },
     {
       title: "Operation",
       key: "opt",
       dataIndex: "opt",
-      width: "25%",
+      align:'center',
       render: (text, record) => (
         <span>
           <Button onClick={() => this.onView(record)}>查看</Button>
@@ -66,12 +68,12 @@ class TableContainer extends Component {
 
   onChangePage = page => {
     const { pageSize, keyword } = this.props.data;
-    this.props.pageAction({ page, pageSize, keyword });
+    this.props.getListAction({ page, pageSize, keyword });
   };
 
   onChangePageSize = (current, pageSize) => {
     const { keyword } = this.props.data;
-    this.props.pageAction({ page: 1, pageSize, keyword });
+    this.props.getListAction({ page: 1, pageSize, keyword });
   };
 
   onSearch = () => {

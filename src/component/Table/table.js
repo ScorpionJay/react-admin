@@ -19,19 +19,19 @@ class TableComponent extends Component {
                 pagination={true}
                 title={this.props.header}
                 rowKey={record=>record.id}
-                // footer={() => <div style={{ textAlign: 'center' }}>
-                //     <Pagination
-                //         current={this.props.current}
-                //         showQuickJumper
-                //         bordered
-                //         total={this.props.total}
-                //         showTotal={(total, range) => `${range[0]}-${range[1]} 总共${total}条`}
-                //         hideOnSinglePage={true}
-                //         onChange={(page) => this.props.onChangePage(page)}
-                //         showSizeChanger={true}
-                //         onShowSizeChange={(current, size) => this.props.onChangePageSize(current, size)}
-                //     />
-                //</div>}
+                footer={() => <div style={{ textAlign: 'center' }}>
+                    <Pagination
+                        current={this.props.current}
+                        showQuickJumper
+                        bordered
+                        total={this.props.total}
+                        showTotal={(total, range) => `${range[0]}-${range[1]} 总共${total}条`}
+                        hideOnSinglePage={true}
+                        onChange={(page) => this.props.onChangePage(page)}
+                        showSizeChanger={true}
+                        onShowSizeChange={(current, size) => this.props.onChangePageSize(current, size)}
+                    />
+                </div>}
             />
 
         </div>
