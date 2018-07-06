@@ -20,13 +20,34 @@ import 'moment/locale/zh-cn';
 
 // import "../style.scss";
 
+
+
+
+
+
+
 const App = () => (
-
   <LocaleProvider locale={zh_CN}>
-
-
     <Router>
-      <div>
+      <First/>
+    </Router>
+  </LocaleProvider>
+);
+
+const First =()=>(
+<div>
+  <Route path="/*" component={Second} />
+</div>
+)
+
+const Second =()=>(
+<div>
+  <Route path="/*/*" component={MainComponent} />
+</div>
+)
+
+const MainComponent = () => (
+  <div>
         <Layout>
           <Header className="header">
             <div className="logo" />
@@ -40,7 +61,7 @@ const App = () => (
                 <Link to="/">Home</Link>
               </Menu.Item>
               <Menu.Item key="2">
-                <Link to="/topics">topics</Link>
+                <Link to="topics">topics</Link>
               </Menu.Item>
               <Menu.Item key="3">nav 3</Menu.Item>
             </Menu>
@@ -62,10 +83,10 @@ const App = () => (
                   }
                 >
                   <Menu.Item key="1">
-                    <Link to="/table">TableComponent</Link>
+                    <Link to="table">TableComponent</Link>
                   </Menu.Item>
                   <Menu.Item key="2">
-                    <Link to="/date">Date</Link>
+                    <Link to="date">Date</Link>
                   </Menu.Item>
                   <Menu.Item key="3">
                     <Link to='tables'>封装表格</Link>
@@ -122,14 +143,14 @@ const App = () => (
                   minHeight: 280
                 }}
               >
-                <Route exact path="/" component={Home} />
-                <Route path="/table" component={TableComponent} />
-                <Route path="/tables" component={Table} />
-                <Route path="/date" component={DateDemo} />
-                <Route path="/demo" component={Demo} />
-                <Route path="/music" component={Music} />
-                <Route path="/upload" component={Upload} />
-                <Route path="/topics" component={Topics} />
+                <Route exact path="/*/*" component={Home} />
+                <Route path="/*/*/table" component={TableComponent} />
+                <Route path="/*/*/tables" component={Table} />
+                <Route path="/*/*/date" component={DateDemo} />
+                <Route path="/*/*/demo" component={Demo} />
+                <Route path="/*/*/music" component={Music} />
+                <Route path="/*/*/upload" component={Upload} />
+                <Route path="/*/*/topics" component={Topics} />
               </Content>
             </Layout>
           </Layout>
@@ -148,9 +169,8 @@ const App = () => (
         </li>
       </ul> */}
       </div>
-    </Router>
-  </LocaleProvider>
-);
+)
+
 
 const Home = () => (
   <div>
