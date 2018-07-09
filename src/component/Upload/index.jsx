@@ -92,7 +92,7 @@ class UploadComponent extends Component {
           className="upload"
           showUploadList={this.props.show === undefined}
           defaultFileList={[...this.state.fileList]}
-          action="//api.nway.top/v1/file/singleSave"
+          action="https://api.nway.top/v1/file/singleSave"
           beforeUpload={this.beforeUpload}
           onChange={this.handleChange}
           onRemove={this.handleRemove}

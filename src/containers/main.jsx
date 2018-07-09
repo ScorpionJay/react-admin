@@ -11,6 +11,7 @@ import DateDemo from "./DateDemo";
 import Table from "./Table";
 import Demo from "./demo";
 import Music from "./music";
+import Banner from "./Banner";
 import Upload from "./Upload";
 
 
@@ -79,6 +80,9 @@ const App = () => (
                   <Menu.Item key="6">
                     <Link to='upload'>Upload</Link>
                   </Menu.Item>
+                  <Menu.Item key="7">
+                    <Link to='banner'>Banner</Link>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
@@ -128,6 +132,7 @@ const App = () => (
                 <Route path="/date" component={DateDemo} />
                 <Route path="/demo" component={Demo} />
                 <Route path="/music" component={Music} />
+                <Route path="/banner" component={Banner} />
                 <Route path="/upload" component={Upload} />
                 <Route path="/topics" component={Topics} />
               </Content>
