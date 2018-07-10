@@ -12,6 +12,7 @@ import Table from "./Table";
 import Demo from "./demo";
 import Music from "./music";
 import Banner from "./Banner";
+import Chart from "./Chart";
 import Upload from "./Upload";
 
 
@@ -83,6 +84,9 @@ const App = () => (
                   <Menu.Item key="7">
                     <Link to='banner'>Banner</Link>
                   </Menu.Item>
+                  <Menu.Item key="8">
+                    <Link to='chart'>Chart</Link>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
@@ -133,6 +137,7 @@ const App = () => (
                 <Route path="/demo" component={Demo} />
                 <Route path="/music" component={Music} />
                 <Route path="/banner" component={Banner} />
+                <Route path="/chart" component={Chart} />
                 <Route path="/upload" component={Upload} />
                 <Route path="/topics" component={Topics} />
               </Content>
