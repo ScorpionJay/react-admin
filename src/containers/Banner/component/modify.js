@@ -26,7 +26,7 @@ class Modify extends Component {
 
   render () {
     const { getFieldDecorator } = this.props.form
-    const {name, artist:artists, album:{picUrl,name:albumName}, province} = this.props.data
+    const {name, album:{picUrl,name:albumName}={}, province} = this.props.data || {}
 
     const fileList = [{
       // uid: -1,
@@ -50,14 +50,6 @@ class Modify extends Component {
                  {getFieldDecorator('name', {
                     rules: [{ required: true, message: '请输入姓名' }],
                     initialValue: name
-                  })(
-                    <Input disabled />
-                  )}
-               </FormItem>
-               <FormItem label='Artist' labelCol={{ span: 5 }} wrapperCol={{ span: 12 }}>
-                 {getFieldDecorator('artist', {
-                    rules: [{ required: true, message: '请输入年龄' }],
-                    initialValue: artists.map(item => item.name).join('、')
                   })(
                     <Input disabled />
                   )}

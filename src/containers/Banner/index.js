@@ -3,13 +3,10 @@
  */
 
 import React, { Component } from "react";
-
 import Table from "../../component/Table/table";
-
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getListAction, pageAction } from "./action";
-
 import { Input, Button, Modal } from "antd";
 import Modify from "./component/modify";
 
@@ -18,7 +15,6 @@ class TableContainer extends Component {
     super(props);
     this.state = {
       keyword: "",
-      visible: 0, //0隐藏、 1查看 2修改 3新增
       title: "",
       vo: null
     };
@@ -33,7 +29,7 @@ class TableContainer extends Component {
 
   columns = [
     {
-        title: "ture",
+        title: "Picture",
         key: 'pic',
         render: (text, record) => (
           <img src={record.album.picUrl} width='50' height='50' />
@@ -60,9 +56,9 @@ class TableContainer extends Component {
       align:'center',
       render: (text, record) => (
         <span>
-          <Button onClick={() => this.onView(record)}>查看</Button>
-          <Button onClick={() => this.onModify(record)}>修改</Button>
-          <Button onClick={() => console.log("delete.....")}>删除</Button>
+          <Button onClick={() => this.onView(record)}>Look</Button>
+          <Button onClick={() => this.onModify(record)}>Modify</Button>
+          <Button onClick={() => console.log("delete.....")}>Delete</Button>
         </span>
       )
     }
@@ -88,19 +84,24 @@ class TableContainer extends Component {
 
   onView = vo => {
     this.setState({
-      visible: 1,
-      title: "查看",
+      title: "View",
       vo
     });
   };
 
   onModify = vo => {
     this.setState({
-      visible: 2,
-      title: "修改",
+      title: "Modify",
       vo
     });
   };
+
+  onAdd = () => {
+    this.setState({
+      title: "Add",
+      vo:{}
+    });
+  }
 
   header = () => (
     <div>
@@ -112,9 +113,8 @@ class TableContainer extends Component {
         onChange={() => this.setState({ keyword: this.inputName.input.value })}
         onPressEnter={this.onSearch}
       />
-      <Button type="primary" icon="search" onClick={this.onSearch}>
-        搜索
-      </Button>
+      <Button type="primary" icon="search" onClick={this.onSearch}>Search</Button>
+      <Button type="primary" icon="plus-circle-o" onClick={this.onAdd}  style={{marginLeft:'1rem'}}>Add</Button>
     </div>
   );
 
@@ -135,19 +135,19 @@ class TableContainer extends Component {
           // this.state.visible &&
           <Modal
             title={this.state.title}
-            visible={this.state.visible !== 0}
+            visible={!!this.state.title}
             maskClosable={false}
             destroyOnClose={true}
             keyboard={false}
             width={800}
             footer={null}
             //onOk={this.handleOk}
-            onCancel={() => this.setState({ visible: 0 })}
+            onCancel={() => this.setState({ title: "" })}
           >
             <Modify
               data={this.state.vo}
               isEdit={true}
-              onCancle={() => this.setState({ visible: 0 })}
+              onCancle={() => this.setState({ title: "" })}
             />
           </Modal>
         }
