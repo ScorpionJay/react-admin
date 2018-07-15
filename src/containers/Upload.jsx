@@ -17,42 +17,42 @@ class UploadContainer extends Component {
     return (
       <div>
         <Upload
-          defaultValue={
+          value={
             "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           }
           type={"picture-card"} // picture picture-card
-          getImgUrl={this.getImgUrl}
+          onChange={this.getImgUrl}
         />
 
         <hr />
 
         <Upload
-          defaultValue={
+          value={
             "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           }
           type={"text"} // picture picture-card
-          getImgUrl={this.getImgUrl}
+          onChange={this.getImgUrl}
         />
 
         <hr />
 
         <Upload
-          defaultValue={
+          value={
             "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           }
           type={"picture"} // picture picture-card
-          getImgUrl={this.getImgUrl}
+          onChange={this.getImgUrl}
         />
 
         <hr />
 
         <Upload
-          defaultValue={
+          value={
             "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
           }
           type={"picture"} // picture picture-card
           show={false}
-          getImgUrl={this.getImgUrl}
+          onChange={this.getImgUrl}
         />
       </div>
     );

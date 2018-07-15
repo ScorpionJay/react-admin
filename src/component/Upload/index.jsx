@@ -1,26 +1,35 @@
-import React, { Component } from "react";
+/*
+ * @Author: Jay 
+ * @Date: 2018-07-14 19:20:11 
+ * @Last Modified by: Jay
+ * @Last Modified time: 2018-07-14 20:26:46
+ */
 
+import React, { Component } from "react";
 import { Upload, Icon, Button, Modal, message } from "antd";
 import "./style";
 
-class UploadComponent extends Component {
+export default class UploadComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loading: false,
-      imageUrl: props.defaultValue || "",
-      fileList: props.defaultValue
-        ? [
-            {
-              uid: Math.random(),
-              url: props.defaultValue,
-              name: props.defaultValue
-            }
-          ]
-        : []
+      previewVisible: false,
+      fileList: props.value ? 
+            [
+        {
+          uid: Math.random(),
+          url:props.value,
+          name:props.value
+        }
+      ]
+      :[]
     };
   }
 
+  /**
+   * 上传前的判断
+   */
   beforeUpload = file => {
     const isJPG = file.type === "image/jpeg";
     if (!isJPG) {
@@ -30,11 +39,25 @@ class UploadComponent extends Component {
     if (!isLt2M) {
       message.error("Image must smaller than 2MB!");
     }
+
+    if( !(isJPG && isLt2M) ){
+      console.log('xxx',this.props.fileList)
+      this.setState(
+        {
+          fileList: []
+        },
+        () => this.props.onChange([])
+      );
+    }
+
     return isJPG && isLt2M;
   };
 
+  /**
+   * 上传中
+   */
   handleChange = info => {
-    console.log(info);
+    // console.log(info);
     // only one
     if (info.fileList.length > 1) {
       info.fileList.shift();
@@ -44,26 +67,30 @@ class UploadComponent extends Component {
       this.setState({ loading: true });
       return;
     }
+
     if (info.file.status === "done") {
-      this.setState(
-        {
-          imageUrl:
-            "http://p95py7ttw.bkt.clouddn.com/" + info.file.response.data,
-          loading: false
-        },
-        this.props.getImgUrl(this.state.imageUrl)
+      this.props.onChange(
+        "http://p95py7ttw.bkt.clouddn.com/" + info.file.response.data
       );
     }
   };
 
+  /**
+   * 移除
+   */
   handleRemove = info => {
     info.fileList = [];
-    this.setState({
-      fileList: [],
-      imageUrl: ""
-    });
+    this.setState(
+      {
+        fileList: []
+      },
+      () => this.props.onChange([])
+    );
   };
 
+  /**
+   * 预览
+   */
   handlePreview = file => {
     this.setState({
       previewImage: file.url || file.thumbUrl,
@@ -71,18 +98,18 @@ class UploadComponent extends Component {
     });
   };
 
+  /**
+   * 取消预览
+   */
   handleCancel = () => this.setState({ previewVisible: false });
 
   render() {
-    console.log(this.state);
-
-    const uploadButton = (
-      <div>
-        <Icon type={this.state.loading ? "loading" : "plus"} />
-        <div className="ant-upload-text">上传</div>
-      </div>
-    );
-    const imageUrl = this.state.imageUrl;
+    // const uploadButton = (
+    //   <div>
+    //     <Icon type={this.state.loading ? "loading" : "plus"} />
+    //     <div className="ant-upload-text">上传</div>
+    //   </div>
+    // );
     const { previewVisible, previewImage, fileList } = this.state;
     return (
       <div>
@@ -90,16 +117,17 @@ class UploadComponent extends Component {
           name="file"
           listType={this.props.type}
           className="upload"
-          showUploadList={this.props.show === undefined}
-          defaultFileList={[...this.state.fileList]}
-          action="https://api.nway.top/v1/file/singleSave"
+          showUploadList={this.props.show}
+          defaultFileList={this.state.fileList}
+          action={this.props.action}
           beforeUpload={this.beforeUpload}
           onChange={this.handleChange}
           onRemove={this.handleRemove}
           onPreview={this.handlePreview}
         >
           <Button>
-            <Icon type="upload" /> {imageUrl ? "重新上传" : "上传"}
+            <Icon type="upload" />
+            {this.props.value ? "重新上传" : "上传"}
           </Button>
         </Upload>
 
@@ -108,11 +136,15 @@ class UploadComponent extends Component {
           footer={null}
           onCancel={this.handleCancel}
         >
-          <img alt="example" style={{ width: "100%" }} src={previewImage} />
+          <img alt="preview" style={{ width: "100%" }} src={previewImage} />
         </Modal>
       </div>
     );
   }
 }
 
-export default UploadComponent;
+UploadComponent.defaultProps = {
+  type: "picture-card",
+  show: true,
+  action: "https://api.nway.top/v1/file/singleSave"
+};

@@ -1,23 +1,21 @@
-import { GET_LIST, SEARCH, PAGE_LIST } from './action';
+import { GET_BANNER,ADD_BANNER,DELETE_BANNER } from './action';
 
 const initialState = {
-    list: [],
-    page: 1,
-    pageSize: 10,
-    total: 0,
-    keyword: ''
+    data: []
 }
 
-const tableReducer = (state = initialState, action) => {
+const reducer = (state = initialState, action) => {
     switch (action.type) {
-        case GET_LIST:
-            return Object.assign({}, state, { ...action.data })
-        case PAGE_LIST:
-            return Object.assign({}, state, { ...action.data })
+        case GET_BANNER:
+            return Object.assign({}, state, {data:[ ...action.data] })
+        case ADD_BANNER:
+            return Object.assign({},state,{data:[ ...state.data,action.data] })
+        case DELETE_BANNER:
+            return Object.assign({},state,{data:[ ...state.data.filter(item=>item.id != action.data)] })
         default:
             return state
     }
 }
 
 
-export default tableReducer
+export default reducer
