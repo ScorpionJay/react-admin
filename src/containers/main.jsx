@@ -15,7 +15,8 @@ import Banner from "./Banner";
 import Chart from "./Chart";
 import Upload from "./Upload";
 
-import Edit from "./Edit";
+import Edit from "./Edit/index2.js";
+// import Edit from "./Edit";
 
 import { LocaleProvider } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';

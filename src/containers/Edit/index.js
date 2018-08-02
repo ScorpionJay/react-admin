@@ -43,6 +43,7 @@ export default class MediaEditorExample extends React.Component {
       //   );
       //   this.setState({ editorState: EditorState.createWithContent(state) });
       console.log(convertToRaw(content));
+      console.log(JSON.stringify(convertToRaw(content)));
     };
     this.onChange = editorState => this.setState({ editorState });
     this.onURLChange = e => this.setState({ urlValue: e.target.value });
