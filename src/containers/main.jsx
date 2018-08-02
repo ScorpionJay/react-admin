@@ -15,6 +15,7 @@ import Banner from "./Banner";
 import Chart from "./Chart";
 import Upload from "./Upload";
 
+import Edit from "./Edit";
 
 import { LocaleProvider } from 'antd';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';
@@ -87,6 +88,9 @@ const App = () => (
                   <Menu.Item key="8">
                     <Link to='chart'>Chart</Link>
                   </Menu.Item>
+                  <Menu.Item key="9">
+                    <Link to='edit'>Edit</Link>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
@@ -140,6 +144,8 @@ const App = () => (
                 <Route path="/chart" component={Chart} />
                 <Route path="/upload" component={Upload} />
                 <Route path="/topics" component={Topics} />
+                <Route path="/topics" component={Topics} />
+                <Route path="/edit" component={Edit} />
               </Content>
             </Layout>
           </Layout>
