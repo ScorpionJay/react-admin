@@ -16,6 +16,7 @@ import Chart from "./Chart";
 import Upload from "./Upload";
 
 import Edit from "./Edit/index2.js";
+import Edit4 from "./Edit/index5.js";
 // import Edit from "./Edit";
 
 import { LocaleProvider } from 'antd';
@@ -92,6 +93,9 @@ const App = () => (
                   <Menu.Item key="9">
                     <Link to='edit'>Edit</Link>
                   </Menu.Item>
+                  <Menu.Item key="10">
+                    <Link to='edit4'>Edit4</Link>
+                  </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
@@ -147,6 +151,7 @@ const App = () => (
                 <Route path="/topics" component={Topics} />
                 <Route path="/topics" component={Topics} />
                 <Route path="/edit" component={Edit} />
+                <Route path="/edit4" component={Edit4} />
               </Content>
             </Layout>
           </Layout>

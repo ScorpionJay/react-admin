@@ -1,15 +1,21 @@
+/**
+ * https://zhuanlan.zhihu.com/p/24951621
+ */
 import React from "react";
 import {
+  AtomicBlockUtils,
   Editor,
   EditorState,
+  RichUtils,
   convertToRaw,
   convertFromHTML,
   ContentState,
+  convertFromRaw,
   CompositeDecorator
 } from "draft-js";
 import { stateToHTML } from "draft-js-export-html";
 
-export default class RichEditor extends React.Component {
+export default class HTMLConvertExample extends React.Component {
   constructor(props) {
     super(props);
     const decorator = new CompositeDecorator([
@@ -31,7 +37,51 @@ export default class RichEditor extends React.Component {
       blocksFromHTML.entityMap
     );
 
+    // const data = {
+    //   blocks: [
+    //     {
+    //       key: "9gm3s",
+    //       text:
+    //         "You can have images in your text field. This is a very rudimentary example, but you can enhance the image plugin with resizing, focus or alignment plugins.",
+    //       type: "unstyled",
+    //       depth: 0,
+    //       inlineStyleRanges: [],
+    //       entityRanges: [],
+    //       data: {}
+    //     },
+    //     {
+    //       key: "ov7r",
+    //       text: " ",
+    //       type: "atomic",
+    //       depth: 0,
+    //       inlineStyleRanges: [],
+    //       entityRanges: [{ offset: 0, length: 1, key: 0 }],
+    //       data: {}
+    //     },
+    //     {
+    //       key: "e23a8",
+    //       text: "See advanced examples further down …",
+    //       type: "unstyled",
+    //       depth: 0,
+    //       inlineStyleRanges: [],
+    //       entityRanges: [],
+    //       data: {}
+    //     }
+    //   ],
+    //   entityMap: {
+    //     "0": {
+    //       type: "IMAGE",
+    //       mutability: "IMMUTABLE",
+    //       data: { src: "http://jay.aliyuntao.top/33.jpg" }
+    //     }
+    //   }
+    // };
+    console.log("xxxxxxxxxx", state);
     this.state = {
+      // editorState: EditorState.createWithContent(
+      //   convertFromRaw(data),
+      //   decorator
+      // )
       editorState: EditorState.createWithContent(state, decorator)
       // editorState: EditorState.createEmpty()
     };
@@ -41,13 +91,49 @@ export default class RichEditor extends React.Component {
       const content = this.state.editorState.getCurrentContent();
       console.log(stateToHTML(content));
       console.log(JSON.stringify(convertToRaw(content)));
+      // console.log(JSON.stringify(content.toJS()));
     };
   }
 
+  componentDidMount() {
+    const decorator = new CompositeDecorator([
+      {
+        strategy: findLinkEntities,
+        component: Link
+      },
+      {
+        strategy: findImageEntities,
+        component: Image
+      }
+    ]);
+    const content = this.state.editorState.getCurrentContent();
+    console.log(JSON.stringify(convertToRaw(content)));
+    let d = convertToRaw(content);
+    this.setState(
+      {
+        editorState: EditorState.createEmpty()
+        // editorState: EditorState.createWithContent(content, decorator)
+      },
+      () =>
+        this.setState({
+          editorState: EditorState.createWithContent(
+            convertFromRaw(d),
+            decorator
+          )
+        })
+    );
+  }
+
   render() {
+    const content = this.state.editorState.getCurrentContent();
+    console.log("render");
+    console.log(JSON.stringify(convertToRaw(content)));
+
     return (
       <div style={styles.root}>
-        <div style={{ marginBottom: 10 }}>Rich Editor</div>
+        <div style={{ marginBottom: 10 }}>
+          Sample HTML converted into Draft content state
+        </div>
         <div style={styles.editor} onClick={this.focus}>
           <Editor
             editorState={this.state.editorState}
