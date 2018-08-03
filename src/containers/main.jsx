@@ -15,6 +15,7 @@ import Banner from "./Banner";
 import Chart from "./Chart";
 import Upload from "./Upload";
 
+import Edit1 from "./Edit";
 import Edit from "./Edit/index2.js";
 import Edit4 from "./Edit/index5.js";
 // import Edit from "./Edit";
@@ -90,6 +91,9 @@ const App = () => (
                   <Menu.Item key="8">
                     <Link to='chart'>Chart</Link>
                   </Menu.Item>
+                  <Menu.Item key="09">
+                    <Link to='edit1'>Edit</Link>
+                  </Menu.Item>
                   <Menu.Item key="9">
                     <Link to='edit'>Edit</Link>
                   </Menu.Item>
@@ -150,6 +154,7 @@ const App = () => (
                 <Route path="/upload" component={Upload} />
                 <Route path="/topics" component={Topics} />
                 <Route path="/topics" component={Topics} />
+                <Route path="/edit1" component={Edit1} />
                 <Route path="/edit" component={Edit} />
                 <Route path="/edit4" component={Edit4} />
               </Content>
