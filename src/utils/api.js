@@ -1,5 +1,5 @@
-// const baseUrl = 'https://api.nway.top';
-const baseUrl = 'http://localhost:8889';
+const baseUrl = 'https://api.nway.top';
+// const baseUrl = 'http://localhost:8889';
 
 
 const api = {
