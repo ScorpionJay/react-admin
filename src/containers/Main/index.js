@@ -14,10 +14,8 @@ const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
 
 import TableComponent from "../TableComponent";
-import DateDemo from "../DateDemo";
 import Table from "../Table";
 import Demo from "../demo";
-import Music from "../music";
 import Banner from "../Banner";
 import Chart from "../Chart";
 import Upload from "../Upload";
@@ -33,6 +31,11 @@ import "moment/locale/zh-cn";
 
 import Loadable from "react-loadable";
 
+const Music = Loadable({
+  loader: () => import(/* webpackChunkName: "Music" */ "../Music"),
+  loading: () => <div>Loading...</div>
+});
+
 const System = Loadable({
   loader: () => import(/* webpackChunkName: "System" */ "../System"),
   loading: () => <div>Loading...</div>
@@ -41,6 +44,7 @@ const System = Loadable({
 import "./style";
 
 const Nav = [
+  { name: "Music", link: "music" },
   { name: "Chart", link: "chart" },
   { name: "System", link: "system" }
 ];
@@ -52,13 +56,13 @@ const App = match => (
         {console.log(match)}
         <header className="header">
           <div className="header-left">
-            <div className="logo">logo</div>
+            <div className="logo" />
             <nav>
               <ul>
                 {Nav &&
                   Nav.map((item, index) => (
                     <li key={index}>
-                      <NavLink to={'/'+item.link}>{item.name}</NavLink>
+                      <NavLink to={"/" + item.link}>{item.name}</NavLink>
                     </li>
                   ))}
               </ul>
@@ -90,6 +94,7 @@ const App = match => (
               >
                 <Switch>
                   <Route exact path={`${match.url}/`} component={Home} />
+                  <Route path="/music" component={Music} />
                   <Route path="/system" component={System} />
                   <Route path="/chart" component={Chart} />
                   <Redirect to={{ pathname: "/system" }} />

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { Route, Link, Switch } from "react-router-dom";
 import { Layout, Menu, Breadcrumb, Icon } from "antd";
 const { SubMenu } = Menu;
 const { Content, Sider } = Layout;
@@ -28,11 +28,23 @@ class System extends Component {
           </ul>
         </nav>
 
-        <Route path={`${this.props.match.url}/system1`} component={System1} />
-        <Route path={`${this.props.match.url}/system2`} component={System2} />
-        <Route path={`${this.props.match.url}/system3`} component={System3} />
-        {/* <Route exact path="/system" component={System} />
-                <Route path="/edit4" component={Edit4} /> */}
+        <div className="content">
+          <Switch>
+            <Route
+              path={`${this.props.match.url}/system1`}
+              component={System1}
+            />
+            <Route
+              path={`${this.props.match.url}/system2`}
+              component={System2}
+            />
+            <Route
+              path={`${this.props.match.url}/system3`}
+              component={System3}
+            />
+            <Route component={() => <div>plz select left menu!</div>} />
+          </Switch>
+        </div>
       </div>
     );
   }

@@ -4,6 +4,8 @@ import Main from ".";
 import store from "../store";
 import { hot } from 'react-hot-loader'
 
+import '../style'
+
 const App = () => (
   <Provider store={store()}>
     <Main />

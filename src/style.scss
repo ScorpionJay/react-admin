@@ -1,5 +1,6 @@
 html,
-body {
+body,
+#root {
   // position: relative;
   height: 100%;
 }
@@ -13,4 +14,6 @@ body {
   position: relative;
 }
 
-
+ul {
+  list-style: none;
+}

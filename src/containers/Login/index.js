@@ -1,11 +1,39 @@
 import React, { Component } from "react";
+import {
+  HashRouter as Router,
+  Route,
+  Link,
+  Redirect,
+  Switch
+} from "react-router-dom";
 import "./style";
-class Login extends Component {
+
+import fakeAuth from "../../utils/Auth";
+class Login extends React.Component {
+  state = {
+    redirectToReferrer: false
+  };
+
+  login = () => {
+    fakeAuth.authenticate(() => {
+      this.setState({ redirectToReferrer: true });
+    });
+  };
+
   render() {
+    const { from } = this.props.location.state || { from: { pathname: "/" } };
+    const { redirectToReferrer } = this.state;
+
+    if (redirectToReferrer) {
+      return <Redirect to={from} />;
+    }
+
     return (
       <div className="login">
-        login form
-        <button onClick={() => console.log("login")}>login</button>
+        <div className='login-form'>
+          <p>You must log in to view the page at {from.pathname}</p>
+          <button onClick={this.login}>Login</button>
+        </div>
       </div>
     );
   }

@@ -1,8 +1,17 @@
 .system{
-    color:red
+    color:#666;
+    display: flex;
 
     .nav{
         display: flex;
         flex-direction: column;
+
+        li{
+            height: 2rem;
+        }
+    }
+
+    .content{
+        margin-left: 2rem;
     }
 }
