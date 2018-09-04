@@ -1,0 +1,43 @@
+$header-height: 4rem;
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #001529;
+  color: #fff;
+  z-index: 9999;
+  height: $header-height;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+
+  .header-left {
+    display: flex;
+    align-items: center;
+    > nav > ul {
+      display: flex;
+      align-items: center;
+      margin: auto;
+
+      > li {
+        list-style: none;
+        padding: 0 3rem;
+        font-size: 1.2rem;
+        a {
+          text-decoration: none;
+          color: #666;
+        }
+      }
+      .active {
+        color: #fff;
+      }
+    }
+  }
+}
+
+main {
+  margin-top: $header-height;
+}

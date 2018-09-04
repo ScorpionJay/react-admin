@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Provider } from "react-redux";
-import Main from "./main";
+import Main from ".";
 import store from "../store";
 import { hot } from 'react-hot-loader'
 

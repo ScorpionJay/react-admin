@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 // import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import { HashRouter as Router, Route, Link,Switch } from "react-router-dom";
 
 import { Layout, Menu, Breadcrumb, Icon } from "antd";
 const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
+const { Content, Sider } = Layout;
+
+import Loadable from "react-loadable";
+
+const System = Loadable({
+  loader: () => import(/* webpackChunkName: "System" */ "./System"),
+  loading: () => <div>Loading...</div>
+});
 
 import TableComponent from "./TableComponent";
 import DateDemo from "./DateDemo";
@@ -20,23 +27,19 @@ import Edit from "./Edit/index2.js";
 import Edit4 from "./Edit/index5.js";
 // import Edit from "./Edit";
 
-import { LocaleProvider } from 'antd';
-import zh_CN from 'antd/lib/locale-provider/zh_CN';
-import 'moment/locale/zh-cn';
+import { LocaleProvider } from "antd";
+import zh_CN from "antd/lib/locale-provider/zh_CN";
+import "moment/locale/zh-cn";
 
-// import "../style.scss";
+import "../style.scss";
 
 const App = () => (
-
   <LocaleProvider locale={zh_CN}>
-
-
     <Router>
       <div>
-        <Layout>
-          <Header className="header">
-            <div className="logo" />
-            <Menu
+        <header className="header">
+          <div className="logo">logo</div>
+          {/* <Menu
               theme="dark"
               mode="horizontal"
               defaultSelectedKeys={["2"]}
@@ -49,8 +52,10 @@ const App = () => (
                 <Link to="/topics">topics</Link>
               </Menu.Item>
               <Menu.Item key="3">nav 3</Menu.Item>
-            </Menu>
-          </Header>
+            </Menu> */}
+          <div>Logout</div>
+        </header>
+        <main>
           <Layout>
             <Sider width={200} style={{ background: "#fff" }}>
               <Menu
@@ -63,8 +68,9 @@ const App = () => (
                   key="sub1"
                   title={
                     <span>
-                      <Icon type="user" />subnav 1
-                  </span>
+                      <Icon type="user" />
+                      subnav 1
+                    </span>
                   }
                 >
                   <Menu.Item key="1">
@@ -74,39 +80,40 @@ const App = () => (
                     <Link to="/date">Date</Link>
                   </Menu.Item>
                   <Menu.Item key="3">
-                    <Link to='tables'>封装表格</Link>
+                    <Link to="tables">封装表格</Link>
                   </Menu.Item>
                   <Menu.Item key="4">
-                    <Link to='demo'>Demo</Link>
+                    <Link to="demo">Demo</Link>
                   </Menu.Item>
                   <Menu.Item key="5">
-                    <Link to='music'>Music</Link>
+                    <Link to="music">Music</Link>
                   </Menu.Item>
                   <Menu.Item key="6">
-                    <Link to='upload'>Upload</Link>
+                    <Link to="upload">Upload</Link>
                   </Menu.Item>
                   <Menu.Item key="7">
-                    <Link to='banner'>Banner</Link>
+                    <Link to="banner">Banner</Link>
                   </Menu.Item>
                   <Menu.Item key="8">
-                    <Link to='chart'>Chart</Link>
+                    <Link to="chart">Chart</Link>
                   </Menu.Item>
                   <Menu.Item key="09">
-                    <Link to='edit1'>Edit</Link>
+                    <Link to="edit1">Edit</Link>
                   </Menu.Item>
                   <Menu.Item key="9">
-                    <Link to='edit'>Edit</Link>
+                    <Link to="edit">Edit</Link>
                   </Menu.Item>
                   <Menu.Item key="10">
-                    <Link to='edit4'>Edit4</Link>
+                    <Link to="edit4">Edit4</Link>
                   </Menu.Item>
                 </SubMenu>
                 <SubMenu
                   key="sub2"
                   title={
                     <span>
-                      <Icon type="laptop" />subnav 2
-                  </span>
+                      <Icon type="laptop" />
+                      subnav 2
+                    </span>
                   }
                 >
                   <Menu.Item key="5">option5</Menu.Item>
@@ -118,8 +125,9 @@ const App = () => (
                   key="sub3"
                   title={
                     <span>
-                      <Icon type="notification" />subnav 3
-                  </span>
+                      <Icon type="notification" />
+                      subnav 3
+                    </span>
                   }
                 >
                   <Menu.Item key="9">option9</Menu.Item>
@@ -144,6 +152,8 @@ const App = () => (
                 }}
               >
                 <Route exact path="/" component={Home} />
+                <Route exact path="/system" component={System} />
+
                 <Route path="/table" component={TableComponent} />
                 <Route path="/tables" component={Table} />
                 <Route path="/date" component={DateDemo} />
@@ -160,8 +170,7 @@ const App = () => (
               </Content>
             </Layout>
           </Layout>
-        </Layout>
-
+        </main>
         {/* <div>
       <ul>
         <li>
