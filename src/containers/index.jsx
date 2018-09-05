@@ -1,16 +1,11 @@
-import React, { Component } from "react";
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React from "react";
 import {
-  HashRouter as Router,
+  // HashRouter as Router,
+  BrowserRouter as Router,
   Route,
-  Link,
   Redirect,
   Switch
 } from "react-router-dom";
-
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
-const { SubMenu } = Menu;
-const { Header, Content, Sider } = Layout;
 
 import Loadable from "react-loadable";
 
@@ -19,36 +14,24 @@ const Login = Loadable({
   loading: () => <div>Loading...</div>
 });
 
-// import TableComponent from "./TableComponent";
-const TableComponent = Loadable({
-  loader: () =>
-    import(/* webpackChunkName: "tableComponent" */ "./TableComponent"),
+const Main = Loadable({
+  loader: () => import(/* webpackChunkName: "Main" */ "./Main"),
   loading: () => <div>Loading...</div>
 });
 
-// import Main from "./main";
-import Main from "./Main";
 import fakeAuth from "../utils/Auth";
 
-import { LocaleProvider } from "antd";
-import zh_CN from "antd/lib/locale-provider/zh_CN";
-import "moment/locale/zh-cn";
-
-// import "../style.scss";
-
 const App = () => (
-  <LocaleProvider locale={zh_CN}>
-    <Router>
-      <Switch>
-        <Route exact path="/login" component={Login} />
-        {/* <Route exact path="/" component={Home} /> */}
-        {/* <Route path="/table" component={TableComponent} /> */}
-        <PrivateRoute path="/" component={Main} />
-        {/* <Route component={NoMatch} /> */}
-        <Redirect to={{ pathname: "/" }} />
-      </Switch>
-    </Router>
-  </LocaleProvider>
+  <Router>
+    <Switch>
+      <Route exact path="/login" component={Login} />
+      {/* <Route exact path="/" component={Home} /> */}
+      <Route path="/about" component={() => about} />
+      <PrivateRoute path="/" component={Main} />
+      {/* <Route component={NoMatch} /> */}
+      {/* <Redirect to={{ pathname: "/" }} /> */}
+    </Switch>
+  </Router>
 );
 
 // const fakeAuth = {
@@ -65,10 +48,6 @@ const App = () => (
 //   }
 // };
 
-/**
- * 私有路由
- * @param {} param0
- */
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}

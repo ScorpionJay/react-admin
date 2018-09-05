@@ -1,10 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { Provider } from "react-redux";
 import Main from ".";
 import store from "../store";
-import { hot } from 'react-hot-loader'
+import { hot } from "react-hot-loader";
 
-import '../style'
+import "../style";
 
 const App = () => (
   <Provider store={store()}>
@@ -12,5 +12,4 @@ const App = () => (
   </Provider>
 );
 
-export default hot(module)(App)
-
+export default hot(module)(App);

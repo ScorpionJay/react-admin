@@ -60,11 +60,12 @@ module.exports = merge(common, {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new ExtractTextPlugin({
-      filename: "css/[name].[hash:5].css"
+      filename: "css/[name].[hash:5].css",
+      publicPath: "/"
     })
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: "./dist",
     hot: true,
     port: 9999,
     // host: "0.0.0.0",

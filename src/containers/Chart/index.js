@@ -3,8 +3,8 @@
  */
 
 import React, { Component } from "react";
-import Chart from "../../component/Chart";
-import Table from "../../component/Table";
+import Chart from "../../components/Chart";
+import Table from "../../components/Table";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getListAction, pageAction } from "./action";

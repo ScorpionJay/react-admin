@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import RichEditor from "../../component/RichEditor";
+import RichEditor from "../../components/RichEditor";
 
 class Edit extends Component {
   constructor(props) {

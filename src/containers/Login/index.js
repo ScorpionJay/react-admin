@@ -1,11 +1,5 @@
-import React, { Component } from "react";
-import {
-  HashRouter as Router,
-  Route,
-  Link,
-  Redirect,
-  Switch
-} from "react-router-dom";
+import React from "react";
+import { HashRouter as Router, Redirect } from "react-router-dom";
 import "./style";
 
 import fakeAuth from "../../utils/Auth";
@@ -30,7 +24,7 @@ class Login extends React.Component {
 
     return (
       <div className="login">
-        <div className='login-form'>
+        <div className="login-form">
           <p>You must log in to view the page at {from.pathname}</p>
           <button onClick={this.login}>Login</button>
         </div>

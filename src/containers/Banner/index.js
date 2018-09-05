@@ -3,7 +3,7 @@
  */
 
 import React, { Component } from "react";
-import Table from "../../component/Table/table";
+import Table from "../../components/Table/table";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { getBannerAction, addBannerAction, deleteBannerAction } from "./action";

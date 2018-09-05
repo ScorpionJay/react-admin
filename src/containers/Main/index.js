@@ -1,28 +1,22 @@
-import React, { Component } from "react";
-// import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import React from "react";
 import {
-  HashRouter as Router,
+  // HashRouter as Router,
+  BrowserRouter as Router,
   Route,
-  Link,
   NavLink,
   Redirect,
   Switch
 } from "react-router-dom";
 
-import { Layout, Menu, Breadcrumb, Icon } from "antd";
-const { SubMenu } = Menu;
-const { Content, Sider } = Layout;
-
-import TableComponent from "../TableComponent";
-import Table from "../Table";
-import Demo from "../demo";
-import Banner from "../Banner";
-import Chart from "../Chart";
-import Upload from "../Upload";
-
-import Edit1 from "../Edit";
-import Edit from "../Edit/index2.js";
-import Edit4 from "../Edit/index5.js";
+// import TableComponent from "../TableComponent";
+// import Table from "../Table";
+// import Demo from "../demo";
+// import Banner from "../Banner";
+// import Chart from "../Chart";
+// import Upload from "../Upload";
+// import Edit1 from "../Edit";
+// import Edit from "../Edit/index2.js";
+// import Edit4 from "../Edit/index5.js";
 // import Edit from "./Edit";
 
 import { LocaleProvider } from "antd";
@@ -30,6 +24,11 @@ import zh_CN from "antd/lib/locale-provider/zh_CN";
 import "moment/locale/zh-cn";
 
 import Loadable from "react-loadable";
+
+const Chart = Loadable({
+  loader: () => import(/* webpackChunkName: "Chart" */ "../Chart"),
+  loading: () => <div>Loading...</div>
+});
 
 const Music = Loadable({
   loader: () => import(/* webpackChunkName: "Music" */ "../Music"),
@@ -49,11 +48,11 @@ const Nav = [
   { name: "System", link: "system" }
 ];
 
-const App = match => (
+const Main = ({ match, history }) => (
   <LocaleProvider locale={zh_CN}>
     <Router>
-      <div>
-        {console.log(match)}
+      <React.Fragment>
+        {/* header */}
         <header className="header">
           <div className="header-left">
             <div className="logo" />
@@ -62,7 +61,9 @@ const App = match => (
                 {Nav &&
                   Nav.map((item, index) => (
                     <li key={index}>
-                      <NavLink to={"/" + item.link}>{item.name}</NavLink>
+                      <NavLink to={`${match.url}` + item.link}>
+                        {item.name}
+                      </NavLink>
                     </li>
                   ))}
               </ul>
@@ -72,50 +73,24 @@ const App = match => (
           <div
             onClick={() => {
               sessionStorage.removeItem("token");
-              match.history.replace("/login");
+              history.replace("/login");
             }}
           >
             Logout
           </div>
         </header>
+
+        {/* content */}
         <main>
-          <Layout>
-            <Layout style={{ padding: "0 24px 24px" }}>
-              {/* <Breadcrumb style={{ margin: "16px 0" }}>
-                <Breadcrumb.Item>App</Breadcrumb.Item>
-              </Breadcrumb> */}
-              <Content
-                style={{
-                  background: "#fff",
-                  padding: 24,
-                  margin: 0,
-                  minHeight: 280
-                }}
-              >
-                <Switch>
-                  <Route exact path={`${match.url}/`} component={Home} />
-                  <Route path="/music" component={Music} />
-                  <Route path="/system" component={System} />
-                  <Route path="/chart" component={Chart} />
-                  <Redirect to={{ pathname: "/system" }} />
-                </Switch>
-              </Content>
-            </Layout>
-          </Layout>
+          <Switch>
+            {/* <Route exact path={`${match.url}/`} component={Home} /> */}
+            <Route path={`${match.url}music`} component={Music} />
+            <Route path={`${match.url}system`} component={System} />
+            <Route path={`${match.url}chart`} component={Chart} />
+            <Redirect to={{ pathname: `${match.url}system` }} />
+          </Switch>
         </main>
-        {/* <div>
-      <ul>
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/table">TableComponent</Link>
-        </li>
-        <li>
-          <Link to="/topics">Topics</Link>
-        </li>
-      </ul> */}
-      </div>
+      </React.Fragment>
     </Router>
   </LocaleProvider>
 );
@@ -126,40 +101,4 @@ const Home = () => (
   </div>
 );
 
-const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
-);
-
-const Topics = ({ match }) => (
-  <div>
-    <h2>Topics</h2>
-    <ul>
-      <li>
-        <Link to={`${match.url}/rendering`}>Rendering with React</Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/components`}>Components</Link>
-      </li>
-      <li>
-        <Link to={`${match.url}/props-v-state`}>Props v. State</Link>
-      </li>
-    </ul>
-
-    <Route path={`${match.url}/:topicId`} component={Topic} />
-    <Route
-      exact
-      path={match.url}
-      render={() => <h3>Please select a topic.</h3>}
-    />
-  </div>
-);
-
-const Topic = ({ match }) => (
-  <div>
-    <h3>{match.params.topicId}</h3>
-  </div>
-);
-
-export default App;
+export default Main;

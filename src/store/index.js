@@ -6,7 +6,7 @@ import { createLogger } from "redux-logger";
 
 function store(initialState) {
   let createStoreWithMiddleware;
-  // 判断环境是否logger
+  // judge env logger
   if (process.env.NODE_ENV === "production") {
     createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
   } else {

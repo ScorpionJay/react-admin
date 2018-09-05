@@ -1,10 +1,3 @@
-/*
- * @Author: Jay 
- * @Date: 2018-07-14 19:20:11 
- * @Last Modified by: Jay
- * @Last Modified time: 2018-07-14 20:26:46
- */
-
 import React, { Component } from "react";
 import { Upload, Icon, Button, Modal, message } from "antd";
 import "./style";
@@ -15,15 +8,15 @@ export default class UploadComponent extends Component {
     this.state = {
       loading: false,
       previewVisible: false,
-      fileList: props.value ? 
-            [
-        {
-          uid: Math.random(),
-          url:props.value,
-          name:props.value
-        }
-      ]
-      :[]
+      fileList: props.value
+        ? [
+            {
+              uid: Math.random(),
+              url: props.value,
+              name: props.value
+            }
+          ]
+        : []
     };
   }
 
@@ -40,8 +33,8 @@ export default class UploadComponent extends Component {
       message.error("Image must smaller than 2MB!");
     }
 
-    if( !(isJPG && isLt2M) ){
-      console.log('xxx',this.props.fileList)
+    if (!(isJPG && isLt2M)) {
+      console.log("xxx", this.props.fileList);
       this.setState(
         {
           fileList: []

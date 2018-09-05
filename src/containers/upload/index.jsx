@@ -1,4 +1,4 @@
-import Upload from "../component/Upload";
+import Upload from "../../components/Upload";
 import React, { Component } from "react";
 
 class UploadContainer extends Component {

@@ -9,7 +9,7 @@ header {
   color: #fff;
   z-index: 9999;
   height: $header-height;
-  display: flex;
+  display: flex !important;
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
@@ -49,5 +49,9 @@ header {
 }
 
 main {
-  padding-top: $header-height +1rem;
+  padding-top: $header-height;
+  height: 100%;
+  > div {
+    height: 100%;
+  }
 }

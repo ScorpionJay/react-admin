@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Form, Select, Input, Button, Icon } from "antd";
 const FormItem = Form.Item;
 const Option = Select.Option;
-import Upload from "../../../component/Upload";
+import Upload from "../../../components/Upload";
 
 import "./modify.scss";
 

@@ -4,7 +4,7 @@
 
 import React, { Component } from "react";
 
-import Table from "../../component/Table/table";
+import Table from "../../components/Table/table";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
@@ -41,7 +41,7 @@ class TableContainer extends Component {
       title: "Name",
       key: "name",
       dataIndex: "name",
-      align:'center'
+      align: "center"
     },
     {
       title: "Artist",
@@ -49,13 +49,13 @@ class TableContainer extends Component {
       render: (text, record) => (
         <span>{record.artist.map(item => item.name).join("、")}</span>
       ),
-      align:'center'
+      align: "center"
     },
     {
       title: "Operation",
       key: "opt",
       dataIndex: "opt",
-      align:'center',
+      align: "center",
       render: (text, record) => (
         <span>
           <Button onClick={() => this.onView(record)}>查看</Button>

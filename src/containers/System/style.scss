@@ -2,16 +2,21 @@
     color:#666;
     display: flex;
 
-    .nav{
-        display: flex;
-        flex-direction: column;
+    nav{
+        // display: flex;
+        // flex-direction: column;
+        height: 100%;
 
-        li{
-            height: 2rem;
+        >ul{
+            height: 100%;
         }
+        // li{
+        //     height: 2rem;
+        // }
     }
 
     .content{
         margin-left: 2rem;
+        width: 100%;
     }
 }
