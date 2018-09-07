@@ -18,6 +18,7 @@ class Modify extends Component {
     this.props.form.validateFieldsAndScroll(async (err, values) => {
       if (!err) {
         console.log("Received values of form: ", values);
+        values.img = values.img.map(item => item.url)[0]; // img
         await this.props.onAdd(values);
         // callback
         this.props.onCancle();
@@ -41,6 +42,13 @@ class Modify extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { name, img, description, url } = this.props.data || {};
+    const imgList = [
+      {
+        uid: img,
+        url: img,
+        name: img
+      }
+    ];
 
     return (
       <div>
@@ -81,7 +89,7 @@ class Modify extends Component {
             wrapperCol={{ span: 12 }}
           >
             {getFieldDecorator("img", {
-              initialValue: img,
+              initialValue: imgList,
               // getValueProps: 'value',
               // valuePropName: 'value',
               rules: [{ required: true, message: "请上传图片" }]
@@ -91,6 +99,7 @@ class Modify extends Component {
               <Upload
                 type={"picture-card"} // picture picture-card
                 onChange={e => e}
+                number={1}
               />
             )}
           </FormItem>

@@ -1,4 +1,4 @@
-const baseUrl = "https://api.nway.top";
+const baseUrl = "https://m.shanghaim.net";
 // const baseUrl = 'http://localhost:8889';
 
 const api = {

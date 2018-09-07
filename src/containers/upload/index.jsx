@@ -5,53 +5,27 @@ class UploadContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      imgUrl: ""
+      imgList: [
+        // {
+        //   uid: Math.random(),
+        //   url:
+        //     "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png",
+        //   name: "test"
+        // }
+      ]
     };
   }
 
-  getImgUrl = url => {
-    this.setState({ imgUrl: url }, () => console.log(this.state));
+  getImgUrl = list => {
+    this.setState({ imgList: list });
   };
 
   render() {
     return (
       <div>
         <Upload
-          value={
-            "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          }
+          value={this.state.imgList}
           type={"picture-card"} // picture picture-card
-          onChange={this.getImgUrl}
-        />
-
-        <hr />
-
-        <Upload
-          value={
-            "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          }
-          type={"text"} // picture picture-card
-          onChange={this.getImgUrl}
-        />
-
-        <hr />
-
-        <Upload
-          value={
-            "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          }
-          type={"picture"} // picture picture-card
-          onChange={this.getImgUrl}
-        />
-
-        <hr />
-
-        <Upload
-          value={
-            "https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-          }
-          type={"picture"} // picture picture-card
-          show={false}
           onChange={this.getImgUrl}
         />
       </div>

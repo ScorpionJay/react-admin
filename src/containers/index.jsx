@@ -26,7 +26,7 @@ const App = () => (
     <Switch>
       <Route exact path="/login" component={Login} />
       {/* <Route exact path="/" component={Home} /> */}
-      <Route path="/about" component={() => about} />
+      <Route path="/about" component={() => <div>about</div>} />
       <PrivateRoute path="/" component={Main} />
       {/* <Route component={NoMatch} /> */}
       {/* <Redirect to={{ pathname: "/" }} /> */}

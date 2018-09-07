@@ -70,7 +70,7 @@ class System extends Component {
         <nav>
           <Menu
             // onClick={this.handleClick}
-            style={{ width: 256 }}
+            style={{ width: 150 }}
             defaultOpenKeys={openKeys}
             defaultSelectedKeys={selectedKeys}
             mode="inline"

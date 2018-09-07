@@ -9,14 +9,6 @@ export default class UploadComponent extends Component {
       loading: false,
       previewVisible: false,
       fileList: props.value
-        ? [
-            {
-              uid: Math.random(),
-              url: props.value,
-              name: props.value
-            }
-          ]
-        : []
     };
   }
 
@@ -50,11 +42,17 @@ export default class UploadComponent extends Component {
    * 上传中
    */
   handleChange = info => {
+    // number
+    const { number } = this.props;
+    if (info.fileList.length > number) {
+      info.fileList.splice(info.fileList.length - number);
+    }
+
     // console.log(info);
     // only one
-    if (info.fileList.length > 1) {
-      info.fileList.shift();
-    }
+    // if (info.fileList.length > 1) {
+    //   info.fileList.shift();
+    // }
 
     if (info.file.status === "uploading") {
       this.setState({ loading: true });
@@ -62,8 +60,20 @@ export default class UploadComponent extends Component {
     }
 
     if (info.file.status === "done") {
-      this.props.onChange(
-        "http://p95py7ttw.bkt.clouddn.com/" + info.file.response.data
+      const { fileList } = this.state;
+      console.log(info.fileList);
+      info.fileList.map(item => {
+        if (!item.url) {
+          item.url =
+            "http://p95py7ttw.bkt.clouddn.com/" + info.file.response.data;
+        }
+      });
+
+      this.setState(
+        {
+          fileList: info.fileList
+        },
+        () => this.props.onChange(this.state.fileList)
       );
     }
   };
@@ -120,7 +130,8 @@ export default class UploadComponent extends Component {
         >
           <Button>
             <Icon type="upload" />
-            {this.props.value ? "重新上传" : "上传"}
+            {/* {this.props.value ? "重新上传" : "上传"} */}
+            Upload
           </Button>
         </Upload>
 
@@ -139,5 +150,7 @@ export default class UploadComponent extends Component {
 UploadComponent.defaultProps = {
   type: "picture-card",
   show: true,
-  action: "https://api.nway.top/v1/file/singleSave"
+  action: "https://m.shanghaim.net/v1/file/singleSave",
+  fileList: [],
+  number: 2
 };
