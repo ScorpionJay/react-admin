@@ -40,7 +40,7 @@ module.exports = {
   output: {
     filename: "js/[name].[hash:6].js",
     chunkFilename: "js/[name].js",
-    publicPath: "/",
+    // publicPath: "/",
     path: path.resolve(__dirname, "../dist/")
   },
   externals: {

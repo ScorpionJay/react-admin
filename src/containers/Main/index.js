@@ -1,7 +1,7 @@
 import React from "react";
 import {
-  // HashRouter as Router,
-  BrowserRouter as Router,
+  HashRouter as Router,
+  // BrowserRouter as Router,
   Route,
   NavLink,
   Redirect,

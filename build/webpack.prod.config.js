@@ -82,7 +82,8 @@ module.exports = merge(common, {
   },
   plugins: [
     new ExtractTextPlugin({
-      filename: "css/[name].[hash:5].css"
+      filename: "css/[name].[hash:5].css",
+      publicPath: "/"
     })
     // new webpack.BannerPlugin("Copyright by Jay " + new Date())
   ],
