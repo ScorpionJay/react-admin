@@ -1,11 +1,12 @@
 import React from "react";
 import {
-  HashRouter as Router,
+  // HashRouter as Router,
   // BrowserRouter as Router,
   Route,
   Redirect,
   Switch
 } from "react-router-dom";
+import Router from "../utils/router";
 
 import Loadable from "react-loadable";
 

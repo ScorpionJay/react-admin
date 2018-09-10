@@ -1,12 +1,14 @@
 import React from "react";
 import {
-  HashRouter as Router,
+  // HashRouter as Router,
   // BrowserRouter as Router,
   Route,
   NavLink,
   Redirect,
   Switch
 } from "react-router-dom";
+
+import Router from "../../utils/router";
 
 // import TableComponent from "../TableComponent";
 // import Table from "../Table";
@@ -20,8 +22,6 @@ import {
 // import Edit from "./Edit";
 
 import { LocaleProvider } from "antd";
-import zh_CN from "antd/lib/locale-provider/zh_CN";
-import "moment/locale/zh-cn";
 
 import Loadable from "react-loadable";
 
@@ -49,50 +49,48 @@ const Nav = [
 ];
 
 const Main = ({ match, history }) => (
-  <LocaleProvider locale={zh_CN}>
-    <Router>
-      <React.Fragment>
-        {/* header */}
-        <header className="header">
-          <div className="header-left">
-            <div className="logo" />
-            <nav>
-              <ul>
-                {Nav &&
-                  Nav.map((item, index) => (
-                    <li key={index}>
-                      <NavLink to={`${match.url}` + item.link}>
-                        {item.name}
-                      </NavLink>
-                    </li>
-                  ))}
-              </ul>
-            </nav>
-          </div>
+  <Router>
+    <React.Fragment>
+      {/* header */}
+      <header className="header">
+        <div className="header-left">
+          <div className="logo" />
+          <nav>
+            <ul>
+              {Nav &&
+                Nav.map((item, index) => (
+                  <li key={index}>
+                    <NavLink to={`${match.url}` + item.link}>
+                      {item.name}
+                    </NavLink>
+                  </li>
+                ))}
+            </ul>
+          </nav>
+        </div>
 
-          <div
-            onClick={() => {
-              sessionStorage.removeItem("token");
-              history.replace("/login");
-            }}
-          >
-            Logout
-          </div>
-        </header>
+        <div
+          onClick={() => {
+            sessionStorage.removeItem("token");
+            history.replace("/login");
+          }}
+        >
+          Logout
+        </div>
+      </header>
 
-        {/* content */}
-        <main>
-          <Switch>
-            {/* <Route exact path={`${match.url}/`} component={Home} /> */}
-            <Route path={`${match.url}music`} component={Music} />
-            <Route path={`${match.url}system`} component={System} />
-            <Route path={`${match.url}chart`} component={Chart} />
-            <Redirect to={{ pathname: `${match.url}system` }} />
-          </Switch>
-        </main>
-      </React.Fragment>
-    </Router>
-  </LocaleProvider>
+      {/* content */}
+      <main>
+        <Switch>
+          {/* <Route exact path={`${match.url}/`} component={Home} /> */}
+          <Route path={`${match.url}music`} component={Music} />
+          <Route path={`${match.url}system`} component={System} />
+          <Route path={`${match.url}chart`} component={Chart} />
+          <Redirect to={{ pathname: `${match.url}system` }} />
+        </Switch>
+      </main>
+    </React.Fragment>
+  </Router>
 );
 
 const Home = () => (

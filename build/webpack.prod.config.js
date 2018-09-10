@@ -4,7 +4,7 @@
 
 const path = require("path");
 const webpack = require("webpack");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const merge = require("webpack-merge");
 const common = require("./webpack.base.config.js");
@@ -21,49 +21,29 @@ module.exports = merge(common, {
         }
       },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            "css-loader",
-            {
-              loader: "postcss-loader",
-              options: {
-                ident: "postcss",
-                plugins: [
-                  require("autoprefixer")(),
-                  require("cssnano")({
-                    preset: "default"
-                  })
-                ]
-              }
-            }
-          ],
-          publicPath: "../"
-        })
-      },
-      {
         test: /\.scss$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            "css-loader",
-            {
-              loader: "postcss-loader",
-              options: {
-                ident: "postcss",
-                plugins: [
-                  require("autoprefixer")(),
-                  require("cssnano")({
-                    preset: "default"
-                  })
-                ]
-              }
-            },
-            "sass-loader"
-          ],
-          publicPath: "../"
-        })
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../"
+            }
+          },
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              ident: "postcss",
+              plugins: [
+                require("autoprefixer")(),
+                require("cssnano")({
+                  preset: "default"
+                })
+              ]
+            }
+          },
+          "sass-loader"
+        ]
       },
       {
         test: /\.(png|jpg|gif|jpeg)$/,
@@ -81,11 +61,11 @@ module.exports = merge(common, {
     ]
   },
   plugins: [
-    new ExtractTextPlugin({
-      filename: "css/[name].[hash:5].css",
-      publicPath: "/"
-    })
-    // new webpack.BannerPlugin("Copyright by Jay " + new Date())
+    new MiniCssExtractPlugin({
+      filename: "css/[name].[hash:5].css"
+      // publicPath: "/"
+    }),
+    new webpack.BannerPlugin("Copyright by Jay " + new Date())
   ],
   optimization: {
     minimizer: [
