@@ -19,7 +19,13 @@ class Modify extends Component {
       if (!err) {
         console.log("Received values of form: ", values);
         values.img = values.img.map(item => item.url)[0]; // img
-        await this.props.onAdd(values);
+        const { id } = this.props.data;
+        values.id = id;
+        if (id) {
+          await this.props.onUpdate(values);
+        } else {
+          await this.props.onAdd(values);
+        }
         // callback
         this.props.onCancle();
       }
@@ -42,13 +48,15 @@ class Modify extends Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     const { name, img, description, url } = this.props.data || {};
-    const imgList = [
-      {
-        uid: img,
-        url: img,
-        name: img
-      }
-    ];
+    const imgList = img
+      ? [
+          {
+            uid: img,
+            url: img,
+            name: img
+          }
+        ]
+      : [];
 
     return (
       <div>

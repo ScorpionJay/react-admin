@@ -6,7 +6,12 @@ import React, { Component } from "react";
 import Table from "../../components/Table/table";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { getBannerAction, addBannerAction, deleteBannerAction } from "./action";
+import {
+  getBannerAction,
+  addBannerAction,
+  updateBannerAction,
+  deleteBannerAction
+} from "./action";
 import { Input, Button, Modal } from "antd";
 import Modify from "./component/modify";
 
@@ -39,14 +44,6 @@ class TableContainer extends Component {
       key: "Image",
       render: (text, record) => <img src={record.img} width="50" height="50" />
     },
-    // {
-    //   title: "Artist",
-    //   key: "artist",
-    //   render: (text, record) => (
-    //     <span>{record.artist.map(item => item.name).join("、")}</span>
-    //   ),
-    //   align:'center'
-    // },
     {
       title: "Operation",
       key: "opt",
@@ -54,9 +51,10 @@ class TableContainer extends Component {
       align: "center",
       render: (text, record) => (
         <span>
-          <Button onClick={() => this.onView(record)}>Look</Button>
           <Button onClick={() => this.onModify(record)}>Modify</Button>
-          <Button onClick={() => this.props.deleteBannerAction(record.id)}>Delete</Button>
+          <Button onClick={() => this.props.deleteBannerAction(record.id)}>
+            Delete
+          </Button>
         </span>
       )
     }
@@ -80,13 +78,6 @@ class TableContainer extends Component {
     });
   };
 
-  onView = vo => {
-    this.setState({
-      title: "View",
-      vo
-    });
-  };
-
   onModify = vo => {
     this.setState({
       title: "Modify",
@@ -104,8 +95,8 @@ class TableContainer extends Component {
   header = () => (
     <div>
       <Input
-        placeholder="请输入姓名"
-        style={{ width: "10rem", marginRight: "1rem" }}
+        placeholder="please input keyword"
+        style={{ width: "12rem", marginRight: "1rem" }}
         value={this.state.keyword}
         ref={el => (this.inputName = el)}
         onChange={() => this.setState({ keyword: this.inputName.input.value })}
@@ -156,6 +147,7 @@ class TableContainer extends Component {
               isEdit={true}
               onCancle={() => this.setState({ title: "" })}
               onAdd={this.props.addBannerAction}
+              onUpdate={this.props.updateBannerAction}
             />
           </Modal>
         }
@@ -171,6 +163,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   getBannerAction: bindActionCreators(getBannerAction, dispatch),
   addBannerAction: bindActionCreators(addBannerAction, dispatch),
+  updateBannerAction: bindActionCreators(updateBannerAction, dispatch),
   deleteBannerAction: bindActionCreators(deleteBannerAction, dispatch)
 });
 
