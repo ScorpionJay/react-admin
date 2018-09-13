@@ -5,7 +5,7 @@
 const path = require("path");
 const webpack = require("webpack");
 const merge = require("webpack-merge");
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const common = require("./webpack.base.config.js");
 
 module.exports = merge(common, {
@@ -21,34 +21,29 @@ module.exports = merge(common, {
         }
       },
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: [
-            "css-loader"
-            // {
-            //   loader: "postcss-loader",
-            //   options: {
-            //     ident: "postcss",
-            //     plugins: [
-            //       require("autoprefixer")(),
-            //       require("cssnano")({
-            //         preset: "default"
-            //       })
-            //     ]
-            //   }
-            // }
-          ],
-          publicPath: "../"
-        })
-      },
-      // {
-      //   test: /\.css$/,
-      //   use: ["style-loader", "css-loader"]
-      // },
-      {
         test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: "../"
+            }
+          },
+          "css-loader",
+          {
+            loader: "postcss-loader",
+            options: {
+              ident: "postcss",
+              plugins: [
+                require("autoprefixer")(),
+                require("cssnano")({
+                  preset: "default"
+                })
+              ]
+            }
+          },
+          "sass-loader"
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif|jpeg)$/,
@@ -59,12 +54,13 @@ module.exports = merge(common, {
   plugins: [
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
-    new ExtractTextPlugin({
+    new MiniCssExtractPlugin({
       filename: "css/[name].[hash:5].css"
+      // publicPath: "/"
     })
   ],
   devServer: {
-    contentBase: './dist',
+    contentBase: "./dist",
     hot: true,
     port: 9999,
     // host: "0.0.0.0",

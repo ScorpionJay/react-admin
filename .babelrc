@@ -1,22 +1,20 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         "targets": {
           "chrome": "60"
         }
       }
     ],
-    "react"
+    "@babel/preset-react"
   ],
   "plugins": [
     "transform-object-rest-spread",
     "transform-class-properties",
     "react-hot-loader/babel",
-    [
-      "import",
-      { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }
-    ] // `style: true` 会加载 less 文件
+    "syntax-dynamic-import",
+    ["import", { "libraryName": "antd", "libraryDirectory": "es" }]
   ]
 }

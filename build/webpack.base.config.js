@@ -38,8 +38,9 @@ module.exports = {
     vendor: ["react", "react-dom", "redux", "react-redux"]
   },
   output: {
-    filename: "js/[name].[hash:6].js",
-    chunkFilename: "js/[name].js",
+    filename: "js/[name].[hash:5].js",
+    chunkFilename: "js/[name].[hash:5].js",
+    // publicPath: "/",
     path: path.resolve(__dirname, "../dist/")
   },
   externals: {
@@ -52,12 +53,19 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin(generateHtml("index", "demo")),
     new webpack.DefinePlugin({
-      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV)
+      "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
+      routerMode: JSON.stringify("hash")
     })
   ],
   optimization: {
     splitChunks: {
       cacheGroups: {
+        styles: {
+          name: "styles",
+          test: /\.scss$/,
+          chunks: "all",
+          enforce: true
+        },
         commons: {
           test: /[\\/]node_modules[\\/]/,
           name: "vendors",
