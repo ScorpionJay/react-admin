@@ -109,48 +109,7 @@ const DragableBodyRow = DropTarget("row", rowTarget, (connect, monitor) => ({
   }))(BodyRow)
 );
 
-const columns = [
-  {
-    title: "Name",
-    dataIndex: "name",
-    key: "name"
-  },
-  {
-    title: "Age",
-    dataIndex: "age",
-    key: "age"
-  },
-  {
-    title: "Address",
-    dataIndex: "address",
-    key: "address"
-  }
-];
-
 class DragSortingTable extends React.Component {
-  state = {
-    data: [
-      {
-        key: "1",
-        name: "John Brown",
-        age: 32,
-        address: "New York No. 1 Lake Park"
-      },
-      {
-        key: "2",
-        name: "Jim Green",
-        age: 42,
-        address: "London No. 1 Lake Park"
-      },
-      {
-        key: "3",
-        name: "Joe Black",
-        age: 32,
-        address: "Sidney No. 1 Lake Park"
-      }
-    ]
-  };
-
   components = {
     body: {
       row: DragableBodyRow
@@ -158,28 +117,21 @@ class DragSortingTable extends React.Component {
   };
 
   moveRow = (dragIndex, hoverIndex) => {
-    const { data } = this.state;
+    const { move, data } = this.props;
     const dragRow = data[dragIndex];
 
-    console.log("====================================");
-    console.log(dragIndex, hoverIndex);
-    console.log("====================================");
-
-    this.setState(
-      update(this.state, {
-        data: {
-          $splice: [[dragIndex, 1], [hoverIndex, 0, dragRow]]
-        }
-      }),
-      () => console.log("state", this.state.data)
+    move(
+      update(data, {
+        $splice: [[dragIndex, 1], [hoverIndex, 0, dragRow]]
+      })
     );
   };
 
   render() {
     return (
       <Table
-        columns={columns}
-        dataSource={this.state.data}
+        columns={this.props.columns}
+        dataSource={this.props.data}
         components={this.components}
         onRow={(record, index) => ({
           index,

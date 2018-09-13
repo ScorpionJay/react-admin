@@ -17,6 +17,7 @@ function generateHtml(name, title) {
     template: `./${name}.template.html`,
     filename: `${name}.html`,
     // chunks: [`${name}`],
+    favicon: "./static/images/favicon.ico",
     inject: true,
     minify:
       ENV === "production"
