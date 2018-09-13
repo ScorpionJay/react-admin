@@ -34,6 +34,17 @@ class Modify extends Component {
       province
     } = this.props.data;
 
+
+    const imgList = picUrl
+      ? [
+          {
+            uid: picUrl,
+            url: picUrl,
+            name: picUrl
+          }
+        ]
+      : [];
+
     const fileList = [
       {
         // uid: -1,
@@ -91,7 +102,7 @@ class Modify extends Component {
             wrapperCol={{ span: 12 }}
           >
             {getFieldDecorator("picture", {
-              initialValue: picUrl,
+              initialValue: imgList,
               // getValueProps: 'value',
               // valuePropName: 'value',
               rules: [{ required: true, message: "请上传图片" }]
@@ -101,6 +112,7 @@ class Modify extends Component {
               <Upload
                 type={"picture-card"} // picture picture-card
                 onChange={e => e}
+                number={1}
               />
               // <img src={picUrl} width='80' height='80'/>
             )}
