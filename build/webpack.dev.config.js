@@ -13,11 +13,16 @@ module.exports = merge(common, {
   devtool: "cheap-module-source-map",
   module: {
     rules: [
+      // {
+      //   enforce: "pre",
+      //   test: /\.jsx?$/,
+      //   exclude: /node_modules/,
+      //   loader: "eslint-loader"
+      // },
       {
-        enforce: "pre",
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loader: "eslint-loader"
+        test: /\.tsx?$/,
+        use: "ts-loader",
+        exclude: /node_modules/
       },
       {
         test: /\.jsx?$/,

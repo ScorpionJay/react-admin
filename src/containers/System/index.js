@@ -9,7 +9,8 @@ import Banner from "../Banner";
 import Upload from "../upload";
 
 import System1 from "./system1";
-import System2 from "./system2";
+// import System2 from "./system2";
+import System2 from "./system2/index.tsx";
 import System3 from "./system3";
 import "./style";
 
