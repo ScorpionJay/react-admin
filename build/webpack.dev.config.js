@@ -21,13 +21,8 @@ module.exports = merge(common, {
       // },
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
+        use: ["ts-loader"],
         exclude: /node_modules/
-      },
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: ["babel-loader"]
       },
       {
         test: /\.scss$/,

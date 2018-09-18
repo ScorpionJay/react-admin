@@ -17,7 +17,6 @@ function generateHtml(name, title) {
     template: `./${name}.template.html`,
     filename: `${name}.html`,
     // chunks: [`${name}`],
-    favicon: "./static/images/favicon.ico",
     inject: true,
     minify:
       ENV === "production"
@@ -35,7 +34,7 @@ module.exports = {
   mode: ENV,
   context: path.resolve(__dirname, "../src/"),
   entry: {
-    index: "./index.js",
+    index: "./index",
     vendor: ["react", "react-dom", "redux", "react-redux"]
   },
   output: {
@@ -49,7 +48,7 @@ module.exports = {
     Swiper: "Swiper"
   },
   resolve: {
-    extensions: [".js", ".jsx", ".scss"]
+    extensions: [".tsx", ".ts", ".js", ".jsx", ".scss"]
   },
   plugins: [
     new HtmlWebpackPlugin(generateHtml("index", "demo")),
