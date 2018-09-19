@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import {
   // HashRouter as Router,
   // BrowserRouter as Router,
@@ -9,6 +9,10 @@ import {
 import Router from "../utils/router";
 
 import Loadable from "react-loadable";
+
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+// import { loginAction } from "./action";
 
 const Login = Loadable({
   loader: () => import(/* webpackChunkName: "login" */ "./Login"),
@@ -22,18 +26,22 @@ const Main = Loadable({
 
 import fakeAuth from "../utils/Auth";
 
-const App = () => (
-  <Router>
-    <Switch>
-      <Route exact path="/login" component={Login} />
-      {/* <Route exact path="/" component={Home} /> */}
-      <Route path="/about" component={() => <div>about</div>} />
-      <PrivateRoute path="/" component={Main} />
-      {/* <Route component={NoMatch} /> */}
-      {/* <Redirect to={{ pathname: "/" }} /> */}
-    </Switch>
-  </Router>
-);
+class App extends Component {
+  render() {
+    return (
+      <Router>
+        <Switch>
+          <Route exact path="/login" component={Login} />
+          {/* <Route exact path="/" component={Home} /> */}
+          <Route path="/about" component={() => <div>about</div>} />
+          <PrivateRoute path="/" component={Main} {...this.props} />
+          {/* <Route component={NoMatch} /> */}
+          {/* <Redirect to={{ pathname: "/" }} /> */}
+        </Switch>
+      </Router>
+    );
+  }
+}
 
 // const fakeAuth = {
 //   isAuthenticated: sessionStorage.getItem("token"),
@@ -49,23 +57,28 @@ const App = () => (
 //   }
 // };
 
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route
-    {...rest}
-    render={props =>
-      fakeAuth.isAuthenticated ? (
-        <Component {...props} />
-      ) : (
-        <Redirect
-          to={{
-            pathname: "/login",
-            state: { from: props.location }
-          }}
-        />
-      )
-    }
-  />
-);
+class PrivateRoute extends Component {
+  render() {
+    const { component: Component, token, ...rest } = this.props;
+    return (
+      <Route
+        {...rest}
+        render={props =>
+          token ? (
+            <Component {...props} />
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: props.location }
+              }}
+            />
+          )
+        }
+      />
+    );
+  }
+}
 
 // class Login extends React.Component {
 //   state = {
@@ -103,4 +116,15 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 //   </div>
 // );
 
-export default App;
+const mapStateToProps = state => ({
+  token: state.loginReducer.token
+});
+
+// const mapDispatchToProps = dispatch => ({
+//   // loginAction: bindActionCreators(loginAction, dispatch)
+// });
+
+export default connect(
+  mapStateToProps
+  // mapDispatchToProps
+)(App);

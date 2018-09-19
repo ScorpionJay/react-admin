@@ -9,26 +9,26 @@ import Banner from "../Banner";
 import Upload from "../upload";
 
 import System1 from "./system1";
-import System2 from "./system2";
 import System3 from "./system3";
+import Video from "./video";
 import "./style";
 
 const Nav = [
   {
     name: "One",
     child: [
-      { name: "Chart", link: "chart" },
       { name: "Banner", link: "banner" },
-      { name: "Music", link: "music" },
-      { name: "Upload", link: "upload" }
+      { name: "Music", link: "music" }
     ]
   },
   {
     name: "Two",
     child: [
-      { name: "System 1", link: "system1" },
-      { name: "System 2", link: "system2" },
-      { name: "System 3", link: "system3" }
+      { name: "Upload", link: "upload" },
+      { name: "Tree", link: "system1" },
+      { name: "Drag table", link: "dragTable" },
+      { name: "Video", link: "video" },
+      { name: "Chart", link: "chart" }
     ]
   }
 ];
@@ -111,13 +111,10 @@ class System extends Component {
               component={System1}
             />
             <Route
-              path={`${this.props.match.url}/system2`}
-              component={System2}
-            />
-            <Route
-              path={`${this.props.match.url}/system3`}
+              path={`${this.props.match.url}/dragTable`}
               component={System3}
             />
+            <Route path={`${this.props.match.url}/video`} component={Video} />
             <Route component={() => <div>plz select left menu!</div>} />
           </Switch>
         </div>
