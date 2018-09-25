@@ -1,5 +1,5 @@
-// const baseUrl = "https://m.shanghaim.net";
-const baseUrl = "http://localhost:8889";
+const baseUrl = "https://m.shanghaim.net";
+// const baseUrl = "http://localhost:8889";
 
 const api = {
   login: baseUrl + "/api/login",

@@ -1,7 +1,8 @@
 /**
  * login action
  */
-import Request from "../../utils/request";
+// import Request from "../../utils/request";
+import Request from "../../utils/fetchWithTimeout";
 import API from "../../utils/api";
 import Storage from "../../utils/storage";
 
