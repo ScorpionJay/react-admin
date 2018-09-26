@@ -1,4 +1,4 @@
-FROM node:latest
+FROM node:alpine
 
 # Set the working directory to /app
 WORKDIR /app
@@ -18,4 +18,5 @@ EXPOSE 9991
 # ENV NAME World
 
 # Run npm run dev when the container launches
-CMD ["npm","run","dev"]
+# CMD ["npm","run","dev"]
+CMD npm run dev
