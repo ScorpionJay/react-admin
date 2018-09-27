@@ -14,11 +14,15 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.(js|jsx)$/,
+        enforce: "pre",
+        test: /\.jsx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        loader: "eslint-loader"
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: ["babel-loader"]
       },
       {
         test: /\.scss$/,
@@ -62,7 +66,7 @@ module.exports = merge(common, {
   devServer: {
     contentBase: "./dist",
     hot: true,
-    port: 9999,
+    port: 9991,
     // host: "0.0.0.0",
     disableHostCheck: true,
     historyApiFallback: true,

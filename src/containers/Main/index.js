@@ -8,6 +8,10 @@ import {
   Switch
 } from "react-router-dom";
 
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { logoutAction } from "../Login/action";
+
 import Router from "../../utils/router";
 
 // import TableComponent from "../TableComponent";
@@ -48,7 +52,7 @@ const Nav = [
   { name: "System", link: "system" }
 ];
 
-const Main = ({ match, history }) => (
+const Main = ({ match, history,logoutAction }) => (
   <Router>
     <React.Fragment>
       {/* header */}
@@ -71,7 +75,7 @@ const Main = ({ match, history }) => (
 
         <div
           onClick={() => {
-            sessionStorage.removeItem("token");
+            logoutAction();
             history.replace("/login");
           }}
         >
@@ -99,4 +103,16 @@ const Home = () => (
   </div>
 );
 
-export default Main;
+
+const mapStateToProps = state => ({
+  token: state.loginReducer.token
+});
+
+const mapDispatchToProps = dispatch => ({
+  logoutAction: bindActionCreators(logoutAction, dispatch)
+});
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Main);
