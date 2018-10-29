@@ -1,6 +1,11 @@
-/**
- * rich editor component
+/*
+ * @Author: jay 
+ * @Date: 2018-10-11 16:19:41 
+ * @Last Modified by: jay
+ * @Last Modified time: 2018-10-29 14:21:03
+ * @Description rich editor component
  */
+
 import React from "react";
 import {
   Editor,
@@ -9,13 +14,17 @@ import {
   convertToRaw,
   convertFromHTML,
   ContentState,
-  CompositeDecorator
+  CompositeDecorator,
+  RichUtils
 } from "draft-js";
+import { message, Modal } from "antd";
 import { stateToHTML } from "draft-js-export-html";
 
 export default class RichEditor extends React.Component {
   constructor(props) {
     super(props);
+
+    // decorator
     const decorator = new CompositeDecorator([
       {
         strategy: findLinkEntities,
@@ -43,37 +52,92 @@ export default class RichEditor extends React.Component {
     this.onChange = editorState => this.setState({ editorState });
   }
 
-  //   componentWillReceiveProps(nextProps) {
-  //     const decorator = new CompositeDecorator([
-  //       {
-  //         strategy: findLinkEntities,
-  //         component: Link
-  //       },
-  //       {
-  //         strategy: findImageEntities,
-  //         component: Image
-  //       }
-  //     ]);
-
-  //     const blocksFromHTML = convertFromHTML(nextProps.data || "<div>1</div>");
-  //     const state = ContentState.createFromBlockArray(
-  //       blocksFromHTML.contentBlocks,
-  //       blocksFromHTML.entityMap
-  //     );
-
-  //     this.setState({
-  //       editorState: nextProps.data
-  //         ? EditorState.createWithContent(state, decorator)
-  //         : EditorState.createEmpty()
-  //     });
-  //   }
-
+  // log
   logState = () => {
     const content = this.state.editorState.getCurrentContent();
     const html = stateToHTML(content);
     console.log(html);
     this.props.getData && this.props.getData(html);
     // console.log(JSON.stringify(convertToRaw(content)));
+  };
+
+  /**
+   * prompt link
+   */
+  promptForLink = e => {
+    const { editorState } = this.state;
+    const selection = editorState.getSelection();
+    if (!selection.isCollapsed()) {
+      const contentState = editorState.getCurrentContent();
+      const startKey = editorState.getSelection().getStartKey();
+      const startOffset = editorState.getSelection().getStartOffset();
+      const blockWithLinkAtBeginning = contentState.getBlockForKey(startKey);
+      const linkKey = blockWithLinkAtBeginning.getEntityAt(startOffset);
+      let url = "";
+      if (linkKey) {
+        const linkInstance = contentState.getEntity(linkKey);
+        url = linkInstance.getData().url;
+      }
+      this.setState(
+        {
+          showURLInput: true,
+          urlValue: url
+        },
+        () => {
+          //setTimeout(() => this.refs.url.focus(), 0);
+        }
+      );
+    } else {
+      console.log("please select word");
+      message.warning("please select word");
+    }
+  };
+
+  /**
+   * confirm link
+   */
+  confirmLink = e => {
+    e.preventDefault();
+    const { editorState, urlValue } = this.state;
+    const contentState = editorState.getCurrentContent();
+    const contentStateWithEntity = contentState.createEntity(
+      "LINK",
+      "MUTABLE",
+      { url: urlValue }
+    );
+    const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
+    const newEditorState = EditorState.set(editorState, {
+      currentContent: contentStateWithEntity
+    });
+    this.setState(
+      {
+        editorState: RichUtils.toggleLink(
+          newEditorState,
+          newEditorState.getSelection(),
+          entityKey
+        ),
+        showURLInput: false,
+        urlValue: ""
+      },
+      () => {
+        //setTimeout(() => this.refs.editor.focus(), 0);
+      }
+    );
+  };
+
+  // remove link
+  removeLink = e => {
+    e.preventDefault();
+    const { editorState } = this.state;
+    const selection = editorState.getSelection();
+    if (!selection.isCollapsed()) {
+      this.setState({
+        editorState: RichUtils.toggleLink(editorState, selection, null)
+      });
+    } else {
+      console.log("please select word");
+      message.warning("please select word");
+    }
   };
 
   confirmMedia = e => {
@@ -86,7 +150,7 @@ export default class RichEditor extends React.Component {
       { src: urlValue }
     );
     const entityKey = contentStateWithEntity.getLastCreatedEntityKey();
-    console.log("xxxxxxxxxxxxxxxxxxxxxxx", entityKey);
+    console.log("xxxxxxxxxxxxxxxxxxxxxxx111", entityKey);
     const newEditorState = EditorState.set(editorState, {
       currentContent: contentStateWithEntity
     });
@@ -105,6 +169,7 @@ export default class RichEditor extends React.Component {
       }
     );
   };
+
   onURLInputKeyDown = e => {
     if (e.which === 13) {
       this.confirmMedia(e);
@@ -131,6 +196,9 @@ export default class RichEditor extends React.Component {
   addVideo = () => {
     this.promptForMedia("VIDEO");
   };
+  addLink = () => {
+    this.promptForLink("LINK");
+  };
 
   onURLChange = e => this.setState({ urlValue: e.target.value });
 
@@ -148,39 +216,59 @@ export default class RichEditor extends React.Component {
             onKeyDown={this.onURLInputKeyDown}
           />
           <button onMouseDown={this.confirmMedia}>Confirm</button>
+          <button onMouseDown={this.confirmLink}>Confirm Link</button>
         </div>
       );
     }
     return (
-      <div style={styles.root}>
-        <div style={{ marginBottom: 10 }}>Rich Editor</div>
-        <div style={styles.buttons}>
-          <button onMouseDown={this.addAudio} style={{ marginRight: 10 }}>
-            Add Audio
-          </button>
-          <button onMouseDown={this.addImage} style={{ marginRight: 10 }}>
-            Add Image
-          </button>
-          <button onMouseDown={this.addVideo} style={{ marginRight: 10 }}>
-            Add Video
-          </button>
+      <React.Fragment>
+        <div style={styles.root}>
+          {/* <div style={{ marginBottom: 10, textAlign: "center" }}>
+            Rich Editor
+          </div> */}
+          <div style={styles.buttons}>
+            <button onMouseDown={this.addLink} style={{ marginRight: 10 }}>
+              Link
+            </button>
+            <button onMouseDown={this.removeLink} style={{ marginRight: 10 }}>
+              Remove link
+            </button>
+            <button onMouseDown={this.addAudio} style={{ marginRight: 10 }}>
+              Add Audio
+            </button>
+            <button onMouseDown={this.addImage} style={{ marginRight: 10 }}>
+              Add Image
+            </button>
+            <button onMouseDown={this.addVideo} style={{ marginRight: 10 }}>
+              Add Video
+            </button>
+          </div>
+
+          <hr style={{ border: "1px solid #ccc" }} />
+          <div style={styles.editor} onClick={this.focus}>
+            <Editor
+              editorState={this.state.editorState}
+              onChange={this.onChange}
+              ref="editor"
+              readOnly={this.props.readOnly}
+              // blockRendererFn={mediaBlockRenderer}
+            />
+          </div>
         </div>
-        {urlInput}
-        <div style={styles.editor} onClick={this.focus}>
-          <Editor
-            editorState={this.state.editorState}
-            onChange={this.onChange}
-            ref="editor"
-            // blockRendererFn={mediaBlockRenderer}
-          />
-        </div>
+        <Modal
+          visible={this.state.showURLInput}
+          onCancel={() => this.setState({ showURLInput: false })}
+          maskClosable={false}
+        >
+          {urlInput}
+        </Modal>
         <input
           onClick={this.logState}
           style={styles.button}
           type="button"
           value="Log State"
         />
-      </div>
+      </React.Fragment>
     );
   }
 }
@@ -217,50 +305,18 @@ const Image = props => {
   return <img src={src} height={height} width={width} style={styles.media} />;
 };
 
-function mediaBlockRenderer(block) {
-  console.log("xxx");
-  if (block.getType() === "atomic") {
-    return {
-      component: Media,
-      editable: false
-    };
-  }
-  return null;
-}
-const Audio1 = props => {
-  return <audio controls src={props.src} style={styles.media} />;
-};
-const Image1 = props => {
-  return <img src={props.src} style={styles.media} />;
-};
-const Video1 = props => {
-  return <video controls src={props.src} style={styles.media} />;
-};
-const Media = props => {
-  const entity = props.contentState.getEntity(props.block.getEntityAt(0));
-  const { src } = entity.getData();
-  const type = entity.getType();
-  let media = src;
-  if (type === "audio") {
-    media = <Audio1 src={src} />;
-  } else if (type === "IMAGE") {
-    media = <Image1 src={src} />;
-  } else if (type === "video") {
-    media = <Video1 src={src} />;
-  }
-  return media;
-};
-
 const styles = {
   root: {
     fontFamily: "'Helvetica', sans-serif",
     padding: 20,
-    width: 600
+    width: 600,
+    minHeight: 300,
+    border: "1px solid #ccc"
   },
   editor: {
-    border: "1px solid #ccc",
+    // border: "1px solid #ccc",
     cursor: "text",
-    minHeight: 80,
+    minHeight: 200,
     padding: 10
   },
   button: {

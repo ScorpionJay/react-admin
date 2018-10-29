@@ -5,9 +5,11 @@ class Edit extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      content: `<p>hello</p>
-    <figure><img src="http://jay.aliyuntao.top/33.jpg"/></figure>
-    <p>See advanced examples further down …</p>`
+    //   content: `<p>hello</p><a href="https://google.com">google</a>
+    // <figure><img src="http://jay.aliyuntao.top/33.jpg"/></figure>
+    // <p>See advanced examples further down …</p>`
+
+    content: `<a href="https://google.com">google</a>  <a href="https://baidu.com">baidu</a>`
     };
   }
 

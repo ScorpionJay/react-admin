@@ -11,6 +11,8 @@ import Upload from "../upload";
 import System1 from "./system1";
 import System3 from "./system3";
 import Video from "./video";
+import Edit from "../Edit";
+
 import "./style";
 
 const Nav = [
@@ -28,7 +30,8 @@ const Nav = [
       { name: "Tree", link: "system1" },
       { name: "Drag table", link: "dragTable" },
       { name: "Video", link: "video" },
-      { name: "Chart", link: "chart" }
+      { name: "Chart", link: "chart" },
+      { name: "Edit", link: "edit" },
     ]
   }
 ];
@@ -106,6 +109,7 @@ class System extends Component {
             <Route path={`${this.props.match.url}/banner`} component={Banner} />
             <Route path={`${this.props.match.url}/music`} component={Music} />
             <Route path={`${this.props.match.url}/upload`} component={Upload} />
+            <Route path={`${this.props.match.url}/edit`} component={Edit} />
             <Route
               path={`${this.props.match.url}/system1`}
               component={System1}

@@ -59,5 +59,8 @@ main {
     margin-left: 2rem;
     width: 100%;
     overflow: auto;
+    >div{
+      margin: 1rem
+    }
   }
 }
