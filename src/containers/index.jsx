@@ -1,4 +1,5 @@
-import React, { Component } from "react";
+import React, { Component, lazy, Suspense } from "react";
+
 import {
   // HashRouter as Router,
   // BrowserRouter as Router,
@@ -14,17 +15,27 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 // import { loginAction } from "./action";
 
-const Login = Loadable({
-  loader: () => import(/* webpackChunkName: "login" */ "./Login"),
-  loading: () => <div>Loading...</div>
-});
+// const Login = Loadable({
+//   loader: () => import(/* webpackChunkName: "login" */ "./Login"),
+//   loading: () => <div>Loading...</div>
+// });
+
+const Login = e => {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <OtherComponent {...e} />
+    </Suspense>
+  );
+};
 
 const Main = Loadable({
   loader: () => import(/* webpackChunkName: "Main" */ "./Main"),
   loading: () => <div>Loading...</div>
 });
 
-import fakeAuth from "../utils/Auth";
+const OtherComponent = lazy(() =>
+  import(/* webpackChunkName: "login" */ "./Login")
+);
 
 class App extends Component {
   render() {
