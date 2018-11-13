@@ -52,7 +52,7 @@ const Nav = [
   { name: "System", link: "system" }
 ];
 
-const Main = ({ match, history,logoutAction }) => (
+const Main = ({ match, history, logoutAction }) => (
   <Router>
     <React.Fragment>
       {/* header */}
@@ -64,7 +64,7 @@ const Main = ({ match, history,logoutAction }) => (
               {Nav &&
                 Nav.map((item, index) => (
                   <li key={index}>
-                    <NavLink to={`${match.url}` + item.link}>
+                    <NavLink to={`${match.url}/` + item.link}>
                       {item.name}
                     </NavLink>
                   </li>
@@ -83,14 +83,13 @@ const Main = ({ match, history,logoutAction }) => (
         </div>
       </header>
 
-      {/* content */}
       <main>
         <Switch>
           {/* <Route exact path={`${match.url}/`} component={Home} /> */}
-          <Route path={`${match.url}music`} component={Music} />
-          <Route path={`${match.url}system`} component={System} />
-          <Route path={`${match.url}chart`} component={Chart} />
-          <Redirect to={{ pathname: `${match.url}system` }} />
+          <Route path={`/*/music`} component={Music} />
+          <Route path={`/*/system`} component={System} />
+          <Route path={`/*/chart`} component={Chart} />
+          <Redirect to={{ pathname: `${match.url}/system` }} />
         </Switch>
       </main>
     </React.Fragment>
@@ -102,7 +101,6 @@ const Home = () => (
     <h2>Home</h2>
   </div>
 );
-
 
 const mapStateToProps = state => ({
   token: state.loginReducer.token

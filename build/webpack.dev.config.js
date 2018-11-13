@@ -30,7 +30,8 @@ module.exports = merge(common, {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "../"
+              // publicPath: "../"
+              publicPath: "/"
             }
           },
           "css-loader",
@@ -59,8 +60,8 @@ module.exports = merge(common, {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      filename: "css/[name].[hash:5].css"
-      // publicPath: "/"
+      filename: "css/[name].[hash:5].css",
+      publicPath: "/"
     })
   ],
   devServer: {
