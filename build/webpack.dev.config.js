@@ -68,7 +68,7 @@ module.exports = merge(common, {
     contentBase: "./dist",
     hot: true,
     port: 9991,
-    // host: "0.0.0.0",
+    host: "0.0.0.0",
     disableHostCheck: true,
     historyApiFallback: true,
     // 设置代理
