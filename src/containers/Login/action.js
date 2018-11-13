@@ -1,7 +1,11 @@
-/**
- * login action
+/*
+ * @Author: jay
+ * @Date: 2018-11-13 17:02:22
+ * @Last Modified by: jay
+ * @Last Modified time: 2018-11-13 17:02:49
+ * @Description login action
  */
-// import Request from "../../utils/request";
+
 import Request from "../../utils/fetchWithTimeout";
 import API from "../../utils/api";
 import Storage from "../../utils/storage";

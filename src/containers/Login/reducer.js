@@ -1,3 +1,10 @@
+/*
+ * @Author: jay
+ * @Date: 2018-11-13 17:02:59
+ * @Last Modified by:   jay
+ * @Last Modified time: 2018-11-13 17:02:59
+ */
+
 import { LOGIN, LOGOUT } from "./action";
 
 const initialState = {

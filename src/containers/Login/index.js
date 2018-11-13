@@ -1,5 +1,8 @@
-/**
- * login
+/*
+ * @Author: jay
+ * @Date: 2018-11-13 17:01:37
+ * @Last Modified by:   jay
+ * @Last Modified time: 2018-11-13 17:01:37
  */
 
 import React from "react";
@@ -12,7 +15,6 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { loginAction } from "./action";
 
-import fakeAuth from "../../utils/Auth";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +38,9 @@ class Login extends React.Component {
     console.log("xxxxxxxxxx", this.props.location);
 
     //const from = this.props.location.pathname;
-    const { from } = this.props.location.state || { from: { pathname: "/a/b/" } };
+    const { from } = this.props.location.state || {
+      from: { pathname: "/a/b/" }
+    };
     const { redirectToReferrer } = this.state;
     const { getFieldDecorator } = this.props.form;
     console.log("ffffff", from);

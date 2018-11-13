@@ -5,6 +5,7 @@
 - react router
 - ant design
 - fetch
+- sass
 
 ## How to run
 
@@ -43,3 +44,8 @@ sudo docker-compose down
 sudo docker build -t react:v1 .
 sudo docker run --name react react:v2
 ```
+
+## Components
+
+- table
+- upload

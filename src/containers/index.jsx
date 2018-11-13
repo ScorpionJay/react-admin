@@ -1,3 +1,10 @@
+/*
+ * @Author: jay
+ * @Date: 2018-11-13 17:00:20
+ * @Last Modified by: jay
+ * @Last Modified time: 2018-11-13 17:00:53
+ */
+
 import React, { Component, lazy, Suspense } from "react";
 
 import { Route, Redirect, Switch } from "react-router-dom";
@@ -47,7 +54,6 @@ class App extends Component {
                         component={Main}
                         {...this.props}
                       />
-                      {/* <Redirect to={{ pathname: "/" }} /> */}
                     </Switch>
                   )}
                 />

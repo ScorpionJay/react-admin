@@ -1,3 +1,10 @@
+/*
+ * @Author: jay
+ * @Date: 2018-11-13 17:03:39
+ * @Last Modified by: jay
+ * @Last Modified time: 2018-11-13 17:18:03
+ */
+
 import React from "react";
 import { Route, NavLink, Redirect, Switch } from "react-router-dom";
 
@@ -8,6 +15,11 @@ import { logoutAction } from "../Login/action";
 import Router from "../../utils/router";
 
 import Loadable from "react-loadable";
+
+const Home = Loadable({
+  loader: () => import(/* webpackChunkName: "Home" */ "../Home"),
+  loading: () => <div>Loading...</div>
+});
 
 const Chart = Loadable({
   loader: () => import(/* webpackChunkName: "Chart" */ "../Chart"),
@@ -27,6 +39,7 @@ const System = Loadable({
 import "./style";
 
 const Nav = [
+  { name: "Home", link: "home" },
   { name: "Music", link: "music" },
   { name: "Chart", link: "chart" },
   { name: "System", link: "system" }
@@ -71,20 +84,15 @@ const Main = ({ match, history, logoutAction }) => (
       <main>
         <Switch>
           {/* <Route exact path={`${match.url}/`} component={Home} /> */}
+          <Route exact path={`/*/*/home`} component={Home} />
           <Route path={`/*/*/music`} component={Music} />
           <Route path={`/*/*/system`} component={System} />
           <Route path={`/*/*/chart`} component={Chart} />
-          <Redirect to={{ pathname: `${match.url}system` }} />
+          <Redirect to={{ pathname: `${fnPrefix(match.url)}/home` }} />
         </Switch>
       </main>
     </React.Fragment>
   </Router>
-);
-
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
 );
 
 const mapStateToProps = state => ({
