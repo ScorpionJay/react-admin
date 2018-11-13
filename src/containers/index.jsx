@@ -33,14 +33,29 @@ class App extends Component {
             path={"/*"}
             render={() => (
               <Switch>
-                <Route exact path="/*/login" component={Login} />
-                <Route path="/*/about" component={() => <div>about</div>} />
-                <PrivateRoute path="/*" component={Main} {...this.props} />
-                {/* <Redirect to={{ pathname: "/" }} /> */}
+                <Route
+                  path={"/*/*"}
+                  render={() => (
+                    <Switch>
+                      <Route exact path="/*/*/login" component={Login} />
+                      <Route
+                        path="/*/*/about"
+                        component={() => <div>about</div>}
+                      />
+                      <PrivateRoute
+                        path="/*/*"
+                        component={Main}
+                        {...this.props}
+                      />
+                      {/* <Redirect to={{ pathname: "/" }} /> */}
+                    </Switch>
+                  )}
+                />
+                <Route component={() => <div>plese check your url</div>} />
               </Switch>
             )}
           />
-          <Route component={() => <div>no</div>} />
+          <Route component={() => <div>plese check your url</div>} />
         </Switch>
       </Router>
     );
@@ -51,9 +66,10 @@ class PrivateRoute extends Component {
   render() {
     const { component: Component, token, ...rest } = this.props;
 
-    // 这里的token 获取处理
-    console.log(this.props.location);
+    console.log("PrivateRoute", this.props.location);
 
+    const url = this.props.location.pathname.split("/");
+    const pre = `/${url[1]}/${url[2]}`;
 
     return (
       <Route
@@ -64,9 +80,8 @@ class PrivateRoute extends Component {
           ) : (
             <Redirect
               to={{
-                pathname: "a" + "/login",
-                // state: { from: props.location }
-                // state: { from: 'a/' }
+                pathname: pre + "/login",
+                state: { from: props.location }
               }}
             />
           )

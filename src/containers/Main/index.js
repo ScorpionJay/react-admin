@@ -1,31 +1,11 @@
 import React from "react";
-import {
-  // HashRouter as Router,
-  // BrowserRouter as Router,
-  Route,
-  NavLink,
-  Redirect,
-  Switch
-} from "react-router-dom";
+import { Route, NavLink, Redirect, Switch } from "react-router-dom";
 
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { logoutAction } from "../Login/action";
 
 import Router from "../../utils/router";
-
-// import TableComponent from "../TableComponent";
-// import Table from "../Table";
-// import Demo from "../demo";
-// import Banner from "../Banner";
-// import Chart from "../Chart";
-// import Upload from "../Upload";
-// import Edit1 from "../Edit";
-// import Edit from "../Edit/index2.js";
-// import Edit4 from "../Edit/index5.js";
-// import Edit from "./Edit";
-
-import { LocaleProvider } from "antd";
 
 import Loadable from "react-loadable";
 
@@ -52,6 +32,11 @@ const Nav = [
   { name: "System", link: "system" }
 ];
 
+const fnPrefix = pathname => {
+  const url = pathname.split("/");
+  return `/${url[1]}/${url[2]}`;
+};
+
 const Main = ({ match, history, logoutAction }) => (
   <Router>
     <React.Fragment>
@@ -64,7 +49,7 @@ const Main = ({ match, history, logoutAction }) => (
               {Nav &&
                 Nav.map((item, index) => (
                   <li key={index}>
-                    <NavLink to={`${match.url}/` + item.link}>
+                    <NavLink to={`${fnPrefix(match.url)}/` + item.link}>
                       {item.name}
                     </NavLink>
                   </li>
@@ -76,7 +61,7 @@ const Main = ({ match, history, logoutAction }) => (
         <div
           onClick={() => {
             logoutAction();
-            history.replace("/login");
+            history.replace(`${fnPrefix(match.url)}/login`);
           }}
         >
           Logout
@@ -86,10 +71,10 @@ const Main = ({ match, history, logoutAction }) => (
       <main>
         <Switch>
           {/* <Route exact path={`${match.url}/`} component={Home} /> */}
-          <Route path={`/*/music`} component={Music} />
-          <Route path={`/*/system`} component={System} />
-          <Route path={`/*/chart`} component={Chart} />
-          <Redirect to={{ pathname: `${match.url}/system` }} />
+          <Route path={`/*/*/music`} component={Music} />
+          <Route path={`/*/*/system`} component={System} />
+          <Route path={`/*/*/chart`} component={Chart} />
+          <Redirect to={{ pathname: `${match.url}system` }} />
         </Switch>
       </main>
     </React.Fragment>
