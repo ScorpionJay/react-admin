@@ -1,8 +1,8 @@
 /*
  * @Author: jay
  * @Date: 2018-11-13 17:01:37
- * @Last Modified by:   jay
- * @Last Modified time: 2018-11-13 17:01:37
+ * @Last Modified by: jay
+ * @Last Modified time: 2018-11-14 16:42:05
  */
 
 import React from "react";
@@ -35,15 +35,12 @@ class Login extends React.Component {
   };
 
   render() {
-    console.log("xxxxxxxxxx", this.props.location);
-
     //const from = this.props.location.pathname;
     const { from } = this.props.location.state || {
-      from: { pathname: "/a/b/" }
+      from: { pathname: "/a/b/" } // default site
     };
     const { redirectToReferrer } = this.state;
     const { getFieldDecorator } = this.props.form;
-    console.log("ffffff", from);
     if (redirectToReferrer) {
       return <Redirect to={from} />;
     }
@@ -51,7 +48,7 @@ class Login extends React.Component {
     return (
       <div className="login">
         <div className="login-form">
-          <div className="title">Admin</div>
+          <div className="title">React</div>
           <Form onSubmit={this.login} className="login-form">
             <FormItem>
               {getFieldDecorator("username", {

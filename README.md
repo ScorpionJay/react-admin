@@ -1,4 +1,6 @@
-# react ant demo
+# react sample
+
+## Skill
 
 - react
 - redux
@@ -6,14 +8,8 @@
 - ant design
 - fetch
 - sass
-
-## How to run
-
-```
-npm install
-npm run dev
-npm run build
-```
+- webpack
+- docker
 
 ## Structure
 
@@ -33,7 +29,15 @@ npm run build
 │  ├─utils
 ```
 
-## docker
+## How to run
+
+```
+npm install
+npm run dev
+npm run build
+```
+
+## Docker
 
 ```
 sudo docker-compose up -d

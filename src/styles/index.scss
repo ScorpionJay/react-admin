@@ -2,7 +2,7 @@
  * @Author: jay 
  * @Date: 2018-11-13 17:11:18 
  * @Last Modified by: jay
- * @Last Modified time: 2018-11-13 17:26:55
+ * @Last Modified time: 2018-11-14 15:39:20
  */
 
 @import "./variable";
@@ -15,15 +15,46 @@ body,
 }
 
 body {
-  // background: #162a5e;
-  font-size: 14px;
+  font-size: 16px;
   color: #000;
   margin: 0;
   padding: 0;
   position: relative;
+  background-color: $body_bg_color !important;
 }
 
 // reset
 ul {
   list-style: none;
+}
+a {
+  // color: #666 !important;
+  text-decoration: none;
+}
+
+.check_url {
+  height: 100%;
+  text-align: center;
+  line-height: 300px;
+  font-size: 20px;
+  color: #999;
+}
+
+.home_profile_popover {
+  a {
+    color: #666;
+  }
+}
+
+.container {
+  width: 940px;
+  margin: 0 auto;
+  background-color: #fff;
+  padding: 20px;
+}
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
 }

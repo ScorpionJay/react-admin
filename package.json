@@ -1,11 +1,12 @@
 {
-  "name": "react-admin",
-  "version": "1.0.0",
-  "description": "react admin",
+  "name": "react-sample",
+  "version": "0.0.1",
+  "description": "react sample",
   "main": "index.js",
   "author": "jay",
   "license": "MIT",
   "scripts": {
+    "start": "npm run dev",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.config.js --open",
     "build:prod": "npm run clean && cross-env  NODE_ENV=production  webpack --config ./build/webpack.prod.config.js",
     "build:dev": "npm run clean && NODE_ENV=development  webpack --config ./build/webpack.dev.config.js",

@@ -2,7 +2,7 @@
  * @Author: jay
  * @Date: 2018-11-13 17:00:20
  * @Last Modified by: jay
- * @Last Modified time: 2018-11-13 17:00:53
+ * @Last Modified time: 2018-11-14 16:38:48
  */
 
 import React, { Component, lazy, Suspense } from "react";
@@ -57,11 +57,11 @@ class App extends Component {
                     </Switch>
                   )}
                 />
-                <Route component={() => <div>plese check your url</div>} />
+                <Route component={() => <div className='check_url'>Plese check your url!</div>} />
               </Switch>
             )}
           />
-          <Route component={() => <div>plese check your url</div>} />
+          <Route component={() => <div className='check_url'>Plese check your url!</div>} />
         </Switch>
       </Router>
     );

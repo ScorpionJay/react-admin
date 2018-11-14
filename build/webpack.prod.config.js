@@ -71,6 +71,8 @@ module.exports = merge(common, {
     minimizer: [
       new UglifyJsPlugin({
         uglifyOptions: {
+          parallel: true,
+          cache: true,
           compress: { warnings: false, drop_console: true },
           output: {
             comments: false

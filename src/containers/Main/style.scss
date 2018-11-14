@@ -1,25 +1,22 @@
 /*
  * @Author: jay 
  * @Date: 2018-11-13 17:03:54 
- * @Last Modified by:   jay 
- * @Last Modified time: 2018-11-13 17:03:54 
+ * @Last Modified by: jay
+ * @Last Modified time: 2018-11-14 16:27:07
  */
-
-$header-height: 4rem;
 
 header {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  background-color: #001529;
+  background-color: #07111b;
   color: #fff;
-  z-index: 9999;
-  height: $header-height;
+  padding: 20px 20px;
+  z-index: 100;
   display: flex !important;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
 
   .header-left {
     display: flex;
@@ -42,7 +39,6 @@ header {
       > li {
         list-style: none;
         padding: 0 1.6rem;
-        font-size: 1rem;
         a {
           text-decoration: none;
           color: #666;
@@ -56,7 +52,7 @@ header {
 }
 
 main {
-  padding-top: $header-height;
+  padding-top: 70px;
   height: 100%;
   > div {
     height: 100%;
