@@ -2,7 +2,7 @@
  * @Author: jay
  * @Date: 2018-11-13 17:14:20
  * @Last Modified by: jay
- * @Last Modified time: 2018-11-13 18:02:25
+ * @Last Modified time: 2018-11-15 11:25:48
  */
 
 import React, { Component } from "react";
@@ -16,7 +16,21 @@ import Nav from "./component/nav";
 import Recommend from "./component/recommend";
 import Tool from "./component/tool";
 
-class TableContainer extends Component {
+const mapStateToProps = state => ({
+  data: state.tableReducer
+});
+
+const mapDispatchToProps = dispatch => ({
+  getListAction: bindActionCreators(getListAction, dispatch),
+  pageAction: bindActionCreators(pageAction, dispatch)
+});
+
+export default
+@connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {};
@@ -45,16 +59,8 @@ class TableContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  data: state.tableReducer
-});
-
-const mapDispatchToProps = dispatch => ({
-  getListAction: bindActionCreators(getListAction, dispatch),
-  pageAction: bindActionCreators(pageAction, dispatch)
-});
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(TableContainer);
+// use es7 decorators remove this method
+// export default connect(
+//   mapStateToProps,
+//   mapDispatchToProps
+// )(TableContainer);
