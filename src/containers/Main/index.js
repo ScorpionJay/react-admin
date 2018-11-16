@@ -2,7 +2,7 @@
  * @Author: jay
  * @Date: 2018-11-13 17:03:39
  * @Last Modified by: jay
- * @Last Modified time: 2018-11-16 21:22:21
+ * @Last Modified time: 2018-11-16 22:38:20
  */
 
 import React from "react";
@@ -106,12 +106,12 @@ const Main = ({ match, history, logoutAction }) => (
     <main>
       <Switch>
         {/* <Route exact path={`${match.url}/`} component={Home} /> */}
-        <Route exact path={`/*/*/home`} component={Home} />
-        <Route path={`/*/*/profile`} component={Profile} />
-        <Route path={`/*/*/music`} component={Music} />
-        <Route path={`/*/*/system`} component={System} />
-        <Route path={`/*/*/chart`} component={Chart} />
-        <Redirect to={{ pathname: `${fnPrefix(match.url)}/home` }} />
+        <Route exact path={`${match.url}/home`} component={Home} />
+        <Route path={`${match.url}/profile`} component={Profile} />
+        <Route path={`${match.url}/music`} component={Music} />
+        <Route path={`${match.url}/system`} component={System} />
+        <Route path={`${match.url}/chart`} component={Chart} />
+        <Redirect to={{ pathname: `${match.url}/home` }} />
       </Switch>
     </main>
   </React.Fragment>

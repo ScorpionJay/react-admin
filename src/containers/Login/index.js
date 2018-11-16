@@ -2,7 +2,7 @@
  * @Author: jay
  * @Date: 2018-11-13 17:01:37
  * @Last Modified by: jay
- * @Last Modified time: 2018-11-15 10:23:23
+ * @Last Modified time: 2018-11-16 22:42:31
  */
 
 import React from "react";
@@ -15,6 +15,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { loginAction } from "./action";
 
+import { fnPrefix } from "../../utils/router";
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -36,12 +37,14 @@ class Login extends React.Component {
 
   render() {
     //const from = this.props.location.pathname;
-    const { from } = this.props.location.state || {
-      from: { pathname: "/a/b/" } // default site
-    };
+    // console.log(this.props);
+
     const { redirectToReferrer } = this.state;
     const { getFieldDecorator } = this.props.form;
     if (redirectToReferrer) {
+      const { from } = this.props.location.state || {
+        from: { pathname: fnPrefix(this.props.match) + "/home" } // default site
+      };
       return <Redirect to={from} />;
     }
 
