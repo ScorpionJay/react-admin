@@ -41,7 +41,7 @@ module.exports = {
   output: {
     filename: "js/[name].[hash:5].js",
     chunkFilename: "js/[name].[hash:5].js",
-    // publicPath: "/",
+    publicPath: "/",
     path: path.resolve(__dirname, "../dist/")
   },
   externals: {
@@ -49,7 +49,11 @@ module.exports = {
     Swiper: "Swiper"
   },
   resolve: {
-    extensions: [".js", ".jsx", ".scss"]
+    extensions: [".js", ".jsx", ".scss"],
+    alias: {
+      Utils: path.resolve(__dirname, "../src/utils"),
+      Components: path.resolve(__dirname, "../src/components")
+    }
   },
   plugins: [
     new HtmlWebpackPlugin(generateHtml("index", "demo")),

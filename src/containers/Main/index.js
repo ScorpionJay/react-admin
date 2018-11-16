@@ -14,19 +14,6 @@ import { logoutAction } from "../Login/action";
 
 import Router from "../../utils/router";
 
-// import TableComponent from "../TableComponent";
-// import Table from "../Table";
-// import Demo from "../demo";
-// import Banner from "../Banner";
-// import Chart from "../Chart";
-// import Upload from "../Upload";
-// import Edit1 from "../Edit";
-// import Edit from "../Edit/index2.js";
-// import Edit4 from "../Edit/index5.js";
-// import Edit from "./Edit";
-
-import { LocaleProvider } from "antd";
-
 import Loadable from "react-loadable";
 
 const Chart = Loadable({
@@ -52,7 +39,7 @@ const Nav = [
   { name: "System", link: "system" }
 ];
 
-const Main = ({ match, history,logoutAction }) => (
+const Main = ({ match, history, logoutAction }) => (
   <Router>
     <React.Fragment>
       {/* header */}
@@ -102,7 +89,6 @@ const Home = () => (
     <h2>Home</h2>
   </div>
 );
-
 
 const mapStateToProps = state => ({
   token: state.loginReducer.token

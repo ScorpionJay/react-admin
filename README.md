@@ -1,18 +1,15 @@
-# react ant demo
+# react sample
+
+## Skill
 
 - react
 - redux
 - react router
 - ant design
 - fetch
-
-## How to run
-
-```
-npm install
-npm run dev
-npm run build
-```
+- sass
+- webpack
+- docker
 
 ## Structure
 
@@ -32,7 +29,15 @@ npm run build
 │  ├─utils
 ```
 
-## docker
+## How to run
+
+```
+npm install
+npm run dev
+npm run build
+```
+
+## Docker
 
 ```
 sudo docker-compose up -d
@@ -43,3 +48,8 @@ sudo docker-compose down
 sudo docker build -t react:v1 .
 sudo docker run --name react react:v2
 ```
+
+## Components
+
+- table
+- upload
