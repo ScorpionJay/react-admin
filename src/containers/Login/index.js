@@ -1,9 +1,3 @@
-/*
- * @Author: jay
- * @Date: 2018-11-13 17:01:37
- * @Last Modified by: jay
- * @Last Modified time: 2018-11-16 22:42:31
- */
 
 import React from "react";
 import { Redirect } from "react-router-dom";
@@ -43,7 +37,7 @@ class Login extends React.Component {
     const { getFieldDecorator } = this.props.form;
     if (redirectToReferrer) {
       const { from } = this.props.location.state || {
-        from: { pathname: fnPrefix(this.props.match) + "/home" } // default site
+        from: { pathname: fnPrefix(this.props.match.path) + "/home" } // default site
       };
       return <Redirect to={from} />;
     }
