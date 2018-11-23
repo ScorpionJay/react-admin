@@ -4,19 +4,21 @@
       "@babel/preset-env",
       {
         "targets": {
-          "chrome": "60"
+          "chrome": "60",
+          "edge": "17",
+          "firefox": "60",
+          "safari": "11.1"
         }
       }
     ],
     "@babel/preset-react"
   ],
   "plugins": [
-    "transform-object-rest-spread",
-    "transform-class-properties",
-    "react-hot-loader/babel",
-    "syntax-dynamic-import",
-    ["import", { "libraryName": "antd", "libraryDirectory": "es" }],
+    "@babel/plugin-proposal-object-rest-spread",
+    "@babel/plugin-syntax-dynamic-import",
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
-    ["@babel/plugin-proposal-class-properties", { "loose": true }]
+    ["@babel/plugin-proposal-class-properties", { "loose": true }],
+    ["import", { "libraryName": "antd", "libraryDirectory": "es" }],
+    "react-hot-loader/babel"
   ]
 }

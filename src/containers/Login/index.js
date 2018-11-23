@@ -43,7 +43,7 @@ class Login extends React.Component {
     return (
       <div className="login">
         <div className="login-form">
-          <div className="title">Admin</div>
+          <div className="title">React</div>
           <Form onSubmit={this.login} className="login-form">
             <FormItem>
               {getFieldDecorator("username", {

@@ -5,6 +5,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
+const ProgressBarPlugin = require("progress-bar-webpack-plugin");
 
 const ENV = process.env.NODE_ENV || "development";
 
@@ -60,7 +61,8 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env.NODE_ENV": JSON.stringify(process.env.NODE_ENV),
       routerMode: JSON.stringify("hash")
-    })
+    }),
+    new ProgressBarPlugin()
   ],
   optimization: {
     splitChunks: {

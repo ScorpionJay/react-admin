@@ -30,7 +30,8 @@ module.exports = merge(common, {
           {
             loader: MiniCssExtractPlugin.loader,
             options: {
-              publicPath: "../"
+              // publicPath: "../"
+              publicPath: "/"
             }
           },
           "css-loader",
@@ -59,21 +60,20 @@ module.exports = merge(common, {
     new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new MiniCssExtractPlugin({
-      filename: "css/[name].[hash:5].css"
-      // publicPath: "/"
+      filename: "css/[name].[hash:5].css",
+      publicPath: "/"
     })
   ],
   devServer: {
     contentBase: "./dist",
     hot: true,
-    port: 9991,
+    port: 8080,
     host: "0.0.0.0",
     disableHostCheck: true,
     historyApiFallback: true,
-    // 设置代理
     proxy: {
       "/api": {
-        target: " http://localhost:18081", // 本地
+        target: " http://localhost:8081",
         changeOrigin: true,
         pathRewrite: { "^/api": "" }
       }

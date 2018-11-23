@@ -11,6 +11,7 @@ import {
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { logoutAction } from "../Login/action";
+import { Popover, Icon } from "antd";
 
 import Router from "../../utils/router";
 
@@ -60,14 +61,40 @@ const Main = ({ match, history, logoutAction }) => (
           </nav>
         </div>
 
-        <div
+        {/* <div
           onClick={() => {
             logoutAction();
             history.replace("/login");
           }}
         >
           Logout
-        </div>
+        </div> */}
+
+        <Popover
+          overlayClassName="home_profile_popover"
+          placement="bottom"
+          content={
+            <ul>
+              <li>
+                <a onClick={() => history.push(`/profile`)}>Profile</a>
+              </li>
+              <li
+                onClick={() => {
+                  logoutAction();
+                  history.replace(`/login`);
+                }}
+              >
+                Logout
+              </li>
+            </ul>
+          }
+          trigger="click"
+        >
+          <div style={{ marginRight: 45 }} className="home_account">
+            <Icon type="user" style={{ marginRight: 10 }} />
+            <span>Jay</span>
+          </div>
+        </Popover>
       </header>
 
       {/* content */}

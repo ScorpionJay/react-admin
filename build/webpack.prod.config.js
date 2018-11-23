@@ -5,7 +5,8 @@
 const path = require("path");
 const webpack = require("webpack");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+// const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 const merge = require("webpack-merge");
 const common = require("./webpack.base.config.js");
 
@@ -69,14 +70,28 @@ module.exports = merge(common, {
   ],
   optimization: {
     minimizer: [
-      new UglifyJsPlugin({
-        uglifyOptions: {
+      // new UglifyJsPlugin({
+      new TerserPlugin({
+        // uglifyOptions: {
+        terserOptions: {
+          parallel: true,
+          cache: true,
           compress: { warnings: false, drop_console: true },
           output: {
-            comments: false
+            // comments: false
+            comments: /Copyright by Jay/i
           }
-        },
-        sourceMap: false
+        }
+        // sourceMap: false,
+        // extractComments: {
+        //   condition: true,
+        //   // filename(file) {
+        //   //  return `${file}.LICENSE`;
+        //   // },
+        //   banner(commentsFile) {
+        //     return `My custom banner about license information ${commentsFile}`;
+        //   }
+        // }
       })
     ]
   }

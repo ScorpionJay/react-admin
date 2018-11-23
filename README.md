@@ -53,3 +53,15 @@ sudo docker run --name react react:v2
 
 - table
 - upload
+
+## Others
+
+- [Babel](https://babeljs.io)
+
+* [webpack](https://webpack.js.org)
+
+use terser-webpack-plugin to compress js
+
+    Switch back to uglify-js (uglify-es is abandoned, if you need uglify ES6 code please use terser-webpack-plugin).
+
+use ncu to check js version

@@ -40,6 +40,8 @@ export default ({
       }
     }
 
+    url += "?companyCode=shyz&siteCode=shyz";
+
     // header
     if (Object.keys(headers).length !== 0) {
       Object.assign(requestConfig.headers, headers);

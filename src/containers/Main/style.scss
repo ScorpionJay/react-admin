@@ -7,7 +7,7 @@ header {
   right: 0;
   background-color: #001529;
   color: #fff;
-  z-index: 9999;
+  z-index: 10;
   height: $header-height;
   display: flex !important;
   align-items: center;
@@ -59,8 +59,8 @@ main {
     margin-left: 2rem;
     width: 100%;
     overflow: auto;
-    >div{
-      margin: 1rem
+    > div {
+      margin: 1rem;
     }
   }
 }
